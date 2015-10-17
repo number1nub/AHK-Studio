@@ -1,0 +1,9 @@
+Menu_Search(){
+	Omni_Search("@")
+}
+Add_Function_Call(){
+	Omni_Search("+")
+}
+Function_Search(){
+	Omni_Search("(")
+}
