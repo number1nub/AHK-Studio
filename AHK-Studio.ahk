@@ -202,3 +202,6 @@ return
 #Include Scratch Pad.ahk
 #Include Remove Current Selection.ahk
 #Include Words In Document.ahk
+#Include Highlight To Matching Brace.ahk
+#Include Select Current Word.ahk
+#Include Previous Found.ahk
