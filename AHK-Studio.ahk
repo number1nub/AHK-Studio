@@ -30,6 +30,7 @@ selectfile:
 tv(files.ssn("//*[@file='" v.openfile "']/@tv").text)
 return
 #Include %A_ScriptDir%
+#Include Lib\Studio.ahk
 #Include About.ahk
 #Include Activate.ahk
 #Include AutoMenu.ahk
