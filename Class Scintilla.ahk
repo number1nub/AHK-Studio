@@ -16,9 +16,9 @@ class s{
 		for a,b in [[2563,1],[2565,1],[2614,1],[2402,15,75],[2124,1]]
 			this[b.1](b.2,b.3?b.3:0)
 		if(info.main)
-			s.main.Insert(this)
+			s.main.push(this)
 		if(info.temp)
-			s.temp.Insert(this)
+			s.temp.push(this)
 		this.2246(2,1),this.2052(32,0),this.2051(32,0xaaaaaa),this.2050,this.2052(33,0x222222),this.2069(0xAAAAAA),this.2601(0xaa88aa),this.2563(1),this.2614(1),this.2565(1),this.2660(1),this.2036(width:=settings.ssn("//tab").text?settings.ssn("//tab").text:5),this.2124(1),this.2260(1),this.2122(5),this.2277(0),this.2056(38,"Consolas"),this.2516(1),color(this),this.2359(3)
 		return this
 	}

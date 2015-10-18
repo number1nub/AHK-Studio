@@ -14,17 +14,16 @@ Notify(csc:=""){
 			lastpos[current(3).sc]:={2008:sc.2008,2009:sc.2009,2152:sc.2152}
 		else
 			lastpos[current(3).sc]:=[]
-		return ;focus:=[]
+		return
 	}
 	if(code=2028){
-		sc:=focus.sc?focus:csc(1),lp:=lastpos[current(3).sc],csc(1)
+		sc:=focus.sc?focus:csc(1),lp:=lastpos[current(3).sc]
 		if((sc.2008!=lp.2008||sc.2009!=lp.2009||sc.2152!=lp.2152)&&lp.2008!="")
 			sc.2160(lp.2008,lp.2009),sc.2613(lp.2152)
 		SetTimer,Enable,-10
 		SetTimer,LButton,-200
 		if(v.options.Check_For_Edited_Files_On_Focus=1)
 			check_for_edited()
-		csc(1)
 		return
 	}
 	if(!s.ctrl[NumGet(info+0)])
