@@ -41,7 +41,7 @@ QF(){
 			}
 		}
 	}
-	lastfind:=find,CenterSel()
+	lastfind:=find
 	if(select.items.MaxIndex()=1)
 		obj:=select.items.1,sc.2160(obj.start,obj.end)
 	else{
@@ -56,18 +56,7 @@ QF(){
 	}select:=[]
 	GuiControl,1:+Redraw,% sc.sc
 	GuiControl,1:+gnotify,% sc.sc
-	return
-	/*
-		if delete
-			minmax:="",delete:=0
-		Loop,% sc.2570{
-			pos:=sc.2577(A_Index-1)
-			if(pos>=startpos){
-				sc.2574(A_Index-1)
-				break
-			}
-		}
-	*/
+	CenterSel()
 	return
 	next:
 	sc:=csc(),sc.2606(),sc.2169()
@@ -83,16 +72,16 @@ QF(){
 		minmax:=[]
 	Loop,% sc.2570
 		o:=[],o[sc.2577(A_Index-1)]:=1,o[sc.2579(A_Index-1)]:=1,minmax.Insert({min:o.MinIndex(),max:o.MaxIndex()})
-	for a,b in minmax
+	for a,b in minmax{
 		sc.2504(b.min,b.max-b.min)
+	}
 	return
 	Quick_Find:
 	if(v.options.Auto_Set_Area_On_Quick_Find)
 		gosub,Set_Selection
-	ControlSend,Edit1,^A,% hwnd([1])
 	ControlFocus,Edit1,% hwnd([1])
+	ControlSend,Edit1,^A,% hwnd([1])
 	lastfind:=""
-	goto,qf
 	return
 	Case_Sensitive:
 	Regex:

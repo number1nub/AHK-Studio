@@ -9,6 +9,7 @@ Notify(csc:=""){
 	if(info=256||info=512||info=768)
 		return
 	if(code=2029||(code=2007&&WinActive(hwnd([1]))=0)){
+		Sleep,20
 		getpos(),focus:=sc:=csc()
 		if(!WinActive(hwnd([1])))
 			lastpos[current(3).sc]:={2008:sc.2008,2009:sc.2009,2152:sc.2152}
@@ -17,6 +18,7 @@ Notify(csc:=""){
 		return
 	}
 	if(code=2028){
+		Sleep,20
 		sc:=focus.sc?focus:csc(1),lp:=lastpos[current(3).sc]
 		if((sc.2008!=lp.2008||sc.2009!=lp.2009||sc.2152!=lp.2152)&&lp.2008!="")
 			sc.2160(lp.2008,lp.2009),sc.2613(lp.2152)
@@ -27,7 +29,7 @@ Notify(csc:=""){
 		return
 	}
 	if(!s.ctrl[NumGet(info+0)])
-		return
+		return csc(1)
 	if code not in 2001,2002,2004,2006,2007,2008,2010,2014,2018,2019,2021,2022,2027
 		return 0
 	;0:"Obj",2:"Code",4:"ch",6:"modType",7:"text",8:"length",9:"linesadded",10:"msg",11:"wparam",12:"lparam",13:"line",14:"fold",17:"listType",22:"updated"
