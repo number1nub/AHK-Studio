@@ -104,6 +104,7 @@ Options(x:=0){
 	Check_For_Edited_Files_On_Focus:
 	Disable_Auto_Indent_For_Non_Ahk_Files:
 	Full_Backup_All_Files:
+	Add_Margins_To_Windows:
 	onoff:=settings.ssn("//options/@ " A_ThisLabel).text?0:1
 	att:=[],att[A_ThisLabel]:=onoff,v.options[A_ThisLabel]:=onoff
 	settings.add("options",att)

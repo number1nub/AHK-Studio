@@ -205,3 +205,4 @@ return
 #Include Highlight To Matching Brace.ahk
 #Include Select Current Word.ahk
 #Include Previous Found.ahk
+#Include New Caret.ahk

@@ -9,19 +9,18 @@ Notify(csc:=""){
 	if(info=256||info=512||info=768)
 		return
 	if(code=2029||(code=2007&&WinActive(hwnd([1]))=0)){
-		Sleep,20
-		getpos(),focus:=sc:=csc()
+		getpos(),focus:=sc:=csc(),obj:=lastpos[current(3).sc]:=[]
 		if(!WinActive(hwnd([1])))
-			lastpos[current(3).sc]:={2008:sc.2008,2009:sc.2009,2152:sc.2152}
-		else
-			lastpos[current(3).sc]:=[]
+			Loop,% sc.2570
+				caret:=sc.2577(A_Index-1),anchor:=sc.2579(A_Index-1),(A_Index=1)?obj.push({2008:caret,2009:anchor,2152:sc.2152,main:caret=sc.2577(sc.2575)}):obj.push({2008:caret,2009:anchor,main:caret:=sc.2577(A_Index-1)})
 		return
 	}
 	if(code=2028){
 		Sleep,20
-		sc:=focus.sc?focus:csc(1),lp:=lastpos[current(3).sc]
-		if((sc.2008!=lp.2008||sc.2009!=lp.2009||sc.2152!=lp.2152)&&lp.2008!="")
-			sc.2160(lp.2008,lp.2009),sc.2613(lp.2152)
+		sc:=focus.sc?focus:csc(1),maincaret:=1
+		for a,b in lastpos[current(3).sc]
+			maincaret:=b.main?A_Index:maincaret,(A_Index=1)?(sc.2160(b.2008,b.2009),sc.2613(b.2152)):sc.2573(b.2008,b.2009)
+		sc.2574(maincaret-1)
 		SetTimer,Enable,-10
 		SetTimer,LButton,-200
 		if(v.options.Check_For_Edited_Files_On_Focus=1)
