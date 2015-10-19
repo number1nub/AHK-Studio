@@ -1,5 +1,4 @@
 Class PluginClass{
-	Close:=[]
 	__New(){
 		return this
 	}

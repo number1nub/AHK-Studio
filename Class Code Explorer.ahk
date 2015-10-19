@@ -11,7 +11,7 @@ Class Code_Explorer{
 		pos:=1
 		while,RegExMatch(text,Code_Explorer.class,found,pos),pos:=found.Pos(1)+found.len(1)
 			if(!no.ssn("//bad[@min<'" found.pos(1) "' and @max>'" found.pos(1) "']"))
-				cexml.under(next,"info",{type:"Class",pos:ppp:=StrPut(SubStr(text,1,found.Pos(1)),"utf-8")-3,text:RegExReplace(found.1,"i)^(class|\s)"),upper:upper(RegExReplace(found.1,"i)(class|\s)"))})
+				cexml.under(next,"info",{type:"Class",opos:found.Pos(1)-1,pos:ppp:=StrPut(SubStr(text,1,found.Pos(1)),"utf-8")-3,text:RegExReplace(found.1,"i)^(class|\s)"),upper:upper(RegExReplace(found.1,"i)(class\s+)"))})
 		clist:=sn(next,"descendant::info[@type='Class']")
 		while,cc:=clist.item[A_Index-1],ea:=xml.ea(cc){
 			tt:=SubStr(text,ea.pos+1),total:="",braces:=0,start:=0
