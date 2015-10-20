@@ -9,10 +9,10 @@ New(filename:="",text:=""){
 		FileAppend,%template%,%filename%
 	}else if(filename=""){
 		FileSelectFile,filename,S,% ProjectFolder(),Create A New Project,*.ahk
-		if ErrorLevel
+		if(ErrorLevel)
 			return
 		filename:=SubStr(filename,-3,1)="."?filename:filename ".ahk"
-		if InStr(filename,".ahk")
+		if(InStr(filename,".ahk"))
 			FileAppend,%template%,%filename%
 	}else if(text){
 		SplitPath,filename,,outdir

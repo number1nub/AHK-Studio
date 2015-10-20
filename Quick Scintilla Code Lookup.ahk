@@ -6,7 +6,7 @@ Quick_Scintilla_Code_Lookup(){
 	ea:=scintilla.ea("//commands/item[@name='" word "']")
 	if(ea.code){
 		syn:=ea.syntax?ea.code "()":ea.code,sc.2160(start,end),sc.2170(0,[syn])
-		if ea.syntax
+		if(ea.syntax)
 			sc.2025(sc.2008-1),Context()
 		return
 	}

@@ -1,5 +1,5 @@
 getpos(){
-	if !current(1).xml
+	if(!current(1).xml)
 		return
 	sc:=csc(),current:=current(2).file,code_explorer.scan(current()),cf:=current(3).file
 	if(!top:=positions.ssn("//main[@file='" current "']"))

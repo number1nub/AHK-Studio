@@ -14,9 +14,9 @@ Personal_Variable_List(){
 	}
 	return
 	addvar:
-	if !variable:=newwin[].variable
+	if(!variable:=newwin[].variable)
 		return
-	if !settings.ssn("//Variables/Variable[text()='" variable "']")
+	if(!settings.ssn("//Variables/Variable[text()='" variable "']"))
 		settings.add("Variables/Variable",,variable,1),LV_Add("",variable)
 	settings.Transform()
 	ControlSetText,Edit1,,% hwnd([6])

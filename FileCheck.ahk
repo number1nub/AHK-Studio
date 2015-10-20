@@ -42,7 +42,7 @@ FileCheck(file){
 					menu:=temp.sn("//*")
 					while,mm:=menu.item[A_Index-1]{
 						ea:=xml.ea(mm)
-						if !ea.clean
+						if(!ea.clean)
 							Continue
 						if(!menus.ssn("//*[@clean='" ea.clean "']")){
 							pea:=xml.ea(mm.ParentNode)

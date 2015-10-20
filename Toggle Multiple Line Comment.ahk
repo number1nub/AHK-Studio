@@ -24,7 +24,7 @@ Toggle_Multiple_Line_Comment(){
 		Loop,% end+1-line
 		{
 			style:=sc.2533(line+(A_Index-1))
-			if style in 0,31,33
+			if(style~="(0|31|33)")
 				sc.2242(4,1),sc.2240(4,5),sc.2532(line+(A_Index-1),30)
 		}
 	}

@@ -27,6 +27,10 @@ Notify(csc:=""){
 			check_for_edited()
 		return
 	}
+	/*
+		if(code=2013)
+			SetStatus(A_Now,3)
+	*/
 	if(!s.ctrl[NumGet(info+0)])
 		return csc(1)
 	if code not in 2001,2002,2004,2006,2007,2008,2010,2014,2018,2019,2021,2022,2027
@@ -91,7 +95,7 @@ Notify(csc:=""){
 		}style:=sc.2010(sc.2008-2)
 		settimer,context,-150
 		c:=fn.ch
-		if c in 44,32
+		if(c~="44|32")
 			replace()
 		if(fn.ch=44&&v.options.Auto_Space_After_Comma)
 			sc.2003(sc.2008," "),sc.2025(sc.2008+1)

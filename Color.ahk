@@ -15,13 +15,13 @@ Color(con:=""){
 				con[b](1,ea.Background)
 		ea.style:=ea.style=5?32:ea.style
 		for a,b in ea{
-			if list[a]&&ea.style!=""
+			if(list[a]&&ea.style!="")
 				con[list[a]](ea.style,b)
 			if(ea.code&&ea.value)
 				con[ea.code](ea.value)
-			else if ea.code&&ea.bool!=1
+			else if(ea.code&&ea.bool!=1)
 				con[ea.code](ea.color,0)
-			else if ea.code&&ea.bool
+			else if(ea.code&&ea.bool)
 				con[ea.code](ea.bool,ea.color)
 			if(ea.style=32)
 				con.2050(),con.2052(30,0x0000ff),con.2052(31,0x00ff00),con.2052(48,0xff00ff)
@@ -45,7 +45,7 @@ Color(con:=""){
 	if(zoom:=settings.ssn("//gui/@zoom").text)
 		con.2373(zoom)
 	for a,b in options
-		if v.options[a]
+		if(v.options[a])
 			con[b](b)
 	kwind:={Personal:0,indent:1,Directives:2,Commands:3,builtin:4,keywords:5,functions:6,flow:7,KeyNames:8}
 	for a,b in v.color

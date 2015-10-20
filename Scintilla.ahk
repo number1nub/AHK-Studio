@@ -17,6 +17,6 @@ Scintilla(return:=""){
 		list:=Trim(list)
 		scintilla:=new xml("scintilla","lib\scintilla.xml")
 	}
-	if return
+	if(return)
 		return list
 }

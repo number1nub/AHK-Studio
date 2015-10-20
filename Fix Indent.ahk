@@ -13,7 +13,7 @@ fix_indent(sc=""){
 	return
 	next:=0,cpos:=0,indent:=0,add:=0
 	lock:=[],track:=[]
-	if !WinExist("ahk_id" sc.sc)
+	if(!WinExist("ahk_id" sc.sc))
 		sc:=csc()
 	filename:=files.ssn("//*[@sc='" sc.2357 "']/@file").text
 	SplitPath,filename,,,ext
@@ -84,7 +84,7 @@ NewIndent(indentwidth:=""){
 		aaobj[cur]:=aa,special:=0,comment:=0
 	}update({sc:sc.2357})
 	if(indentwidth)
-		return sc.2079() ;,sc.Enable(1)
+		return sc.2079(),sc.Enable(1)
 	WinGetTitle,title,% hwnd([1])
 	if(braces&&InStr(title,"Segment Open!   -   ")=0)
 		WinSetTitle,% hwnd([1]),,% "Segment Open!   -   AHK Studio - " current(3).file
@@ -99,9 +99,8 @@ NewIndent(indentwidth:=""){
 	line:=sc.2166(sc.2008)
 	if(sc.2008=sc.2128(line)&&v.options.Manual_Continuation_Line){
 		ss:=(sc.getline(line-1)~="i)^\s*(&&|OR|AND|\.|\,|\|\||:|\?)")
-		if ss
+		if(ss)
 			sc.2126(line,sc.2127(line-1)),sc.2025(sc.2128(line))
 	}
-	sc.Enable(1)
-	sc.2079
+	sc.Enable(1),sc.2079
 }

@@ -4,14 +4,14 @@ New_Segment(new:="",text:="",adjusted:=""){
 	maindir:=dir
 	if(!new){
 		FileSelectFile,new,s,%dir%,Create a new Segment,*.ahk
-		if ErrorLevel
+		if(ErrorLevel)
 			return
 		new:=new~="\.ahk$"?new:new ".ahk"
-		if FileExist(new)
+		if(FileExist(new))
 			return m("File Already Exists.","Please create a new file")
 		SplitPath,new,filename,dir,,func
 	}
-	if node:=ssn(current(1),"descendant::file[@file='" new "']")
+	if(node:=ssn(current(1),"descendant::file[@file='" new "']"))
 		return tv(ssn(node,"@tv").Text)
 	SplitPath,new,file,newdir,,function
 	Gui,1:Default

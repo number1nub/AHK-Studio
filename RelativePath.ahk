@@ -2,7 +2,7 @@ RelativePath(main,new){
 	SplitPath,main,,mdir
 	SplitPath,new,filename,ndir
 	for a,b in {"%A_AppData%":A_AppData,"%A_AppDataCommon%":A_AppDataCommon}
-		if InStr(new,b)
+		if(InStr(new,b))
 			return RegExReplace(new,"\Q" b "\E",a)
 	smain:=StrSplit(mdir,"\"),snew:=StrSplit(ndir,"\")
 	if(smain.1!=snew.1)

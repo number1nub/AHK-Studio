@@ -7,7 +7,7 @@ set_as_default_editor(){
 	dynarun(pgm)
 	Sleep,250
 	RegRead,output,HKCU,SOFTWARE\Classes\AutoHotkeyScript\Shell\Edit\Command
-	if InStr(output,"ahk studio")
+	if(InStr(output,"ahk studio"))
 		m("AHK Studio is now your default editor for .ahk file")
 	else if InStr(output,"notepad.exe")
 		m("Notepad.exe is now your default editor")

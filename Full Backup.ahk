@@ -16,7 +16,7 @@ Full_Backup(remove:=0){
 				Continue
 			file:=Trim(RegExReplace(A_LoopFileFullPath,"i)\Q" dir "\E"),"\")
 			SplitPath,file,filename,ddir
-			if !FileExist(backup "\" ddir)
+			if(!FileExist(backup "\" ddir))
 				FileCreateDir,% backup "\" ddir
 			ndir:=ddir?backup "\" ddir:backup
 			FileCopy,%A_LoopFileFullPath%,%ndir%\%filename%
@@ -26,14 +26,14 @@ Full_Backup(remove:=0){
 		while,af:=allfiles.item[A_Index-1]{
 			file:=Trim(RegExReplace(af.text,"i)\Q" dir "\E"),"\")
 			SplitPath,file,filename,ddir
-			if !FileExist(backup "\" ddir)
+			if(!FileExist(backup "\" ddir))
 				FileCreateDir,% backup "\" ddir
 			ndir:=ddir?backup "\" ddir:backup
 			FileCopy,% af.text,%ndir%\%filename%
 		}
 	}
 	loop,%dir%\backup\*.*,2
-		if !InStr(A_LoopFileFullPath,"Full Backup")
+		if(!InStr(A_LoopFileFullPath,"Full Backup"))
 			FileRemoveDir,%A_LoopFileFullPath%,1
 	SplashTextOff
 }

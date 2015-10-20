@@ -1,6 +1,6 @@
 Omni_Search(start=""){
 	static newwin,select:=[],obj:=[],pre
-	if hwnd(20)
+	if(hwnd(20))
 		return
 	code_explorer.scan(current())
 	WinGetPos,x,y,w,h,% hwnd([1])
@@ -13,12 +13,12 @@ Omni_Search(start=""){
 	Gui,20:Show,% Center(20) " AutoSize",Omni-Search
 	ControlSend,Edit1,^{End},% hwnd([20])
 	bm:=bookmarks.sn("//mark")
-	if top:=cexml.ssn("//bookmarks")
+	if(top:=cexml.ssn("//bookmarks"))
 		top.ParentNode.RemoveChild(top)
 	top:=cexml.Add("bookmarks")
 	while,bb:=bm.item[A_Index-1],ea:=bo
 		okmarks.ea(bb)
-	if !cexml.ssn("//bookmark/*[@file='" ssn(bb.ParentNode,"@file").text "']")
+	if(!cexml.ssn("//bookmark/*[@file='" ssn(bb.ParentNode,"@file").text "']"))
 		cexml.under(top,"bookmark",{type:"bookmark",text:ea.name,line:ea.line,file:ssn(bb.ParentNode,"@file").text,order:"text,type,file",root:ssn(bb,"ancestor::main/@file").text})
 	oss:
 	break:=1
@@ -69,7 +69,7 @@ Omni_Search(start=""){
 			if(count=d)
 				rating+=10
 		}
-		if div:=RegExMatch(text,"i)" sea:=RegExReplace(search,"(.)","\b$1.*"),found){
+		if(div:=RegExMatch(text,"i)" sea:=RegExReplace(search,"(.)","\b$1.*"),found)){
 			rating+=100/div
 			for c,d in StrSplit(sea,"\b")
 				rating+=20/RegExMatch(text,"i)\b" d)
@@ -77,7 +77,7 @@ Omni_Search(start=""){
 		if(ssn(ll,"ancestor::main[@file='" b.file "']")&&search="")
 			rating+=100
 		for c,d in StrSplit(search," ")
-			if RegExMatch(text,"i)\b" d)
+			if(RegExMatch(text,"i)\b" d))
 				rating+=20
 		if(SubStr(text,1,StrLen(search))=search)
 			rating+=50

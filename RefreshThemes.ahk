@@ -6,7 +6,7 @@ RefreshThemes(){
 		SetStatus(settings.ssn("//fonts/font[@style='5']"))
 	default:=ea:=settings.ea("//fonts/font[@style='5']")
 	for win,b in hwnd("get"){
-		if win>99
+		if(win>99)
 			return
 		WinGet,controllist,ControlList,% "ahk_id" b
 		Gui,%win%:Default

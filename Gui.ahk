@@ -105,7 +105,7 @@ Gui(){
 	last:=settings.sn("//last/*"),hk(1),hotkeys([1],enter),tv(files.ssn("//file[@file='" last.item[0].text "']/@tv").text,1)
 	if(last.length>1){
 		while,file:=last.item[A_Index-1]{
-			if A_Index=1
+			if(A_Index=1)
 				Continue
 			New_Scintilla_Window(file.text)
 		}

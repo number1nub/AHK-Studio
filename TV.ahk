@@ -28,9 +28,7 @@ tv(tv:=0,open:="",history:=0){
 					return
 				goto,tvtop
 			}
-			sc.2358(0,doc),tt:=update({get:fn}),sc.2037(65001),txt:=Encode(tt),set()
-			sc.2181(0,&txt)
-			sc.2175(),dup:=files.sn("//file[@file='" fn "']")
+			sc.2358(0,doc),tt:=update({get:fn}),sc.2037(65001),txt:=Encode(tt),set(),sc.2181(0,&txt),sc.2175(),dup:=files.sn("//file[@file='" fn "']")
 			while,dd:=dup.item[A_Index-1]
 				dd.SetAttribute("sc",doc)
 		}else

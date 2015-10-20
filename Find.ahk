@@ -28,7 +28,7 @@ find(){
 	ControlGetText,Button,Button7,% hwnd([5])
 	if(InStr(button,"search")){
 		ea:=newwin[],count:=0
-		if !find:=ea.find
+		if(!find:=ea.find)
 			return
 		infopos.setattribute("search",find),foundinfo:=[]
 		Gui,5:Default
@@ -54,7 +54,7 @@ find(){
 			}
 		}
 		WinSetTitle,% hwnd([5]),,Find : %count%
-		if TV_GetCount()
+		if(TV_GetCount())
 			ControlFocus,SysTreeView321
 		GuiControl,5:+Redraw,SysTreeView321
 		SetTimer,findlabel,-200
@@ -87,7 +87,7 @@ find(){
 		return
 	sel:=TV_GetSelection()
 	Gui,5:TreeView,SysTreeView321
-	if refreshing
+	if(refreshing)
 		return
 	ControlGetFocus,focus,% hwnd([5])
 	SetTimer,findlabel,-200
@@ -99,9 +99,9 @@ find(){
 	findlabel:
 	Gui,5:Default
 	sel:=TV_GetSelection()
-	if !TV_GetCount()
+	if(!TV_GetCount())
 		Buttontext:="Search"
-	else if TV_GetChild(sel)
+	else if(TV_GetChild(sel))
 		Buttontext:=TV_Get(sel,"E")?"Contract":"Expand"
 	else if(TV_GetCount()&&TV_GetChild(sel)=0)
 		Buttontext:="Jump"

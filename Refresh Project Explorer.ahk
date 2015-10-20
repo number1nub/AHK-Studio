@@ -4,7 +4,7 @@ Refresh_Project_Explorer(openfile:=""){
 	GuiControl,1:-Redraw,SysTreeView321
 	parent:=current(2).file,file:=current(3).file,Save(),files:=new xml("files"),open:=settings.sn("//open/*"),cexml:=new xml("code_explorer"),Index_Lib_Files(),omni_search_class.menus()
 	while,oo:=open.item[A_Index-1]{
-		if !FileExist(oo.text){
+		if(!FileExist(oo.text)){
 			rem:=settings.sn("//file[text()='" oo.text "']")
 			while,rr:=rem.item[A_Index-1]
 				rr.ParentNode.RemoveChild(rr)

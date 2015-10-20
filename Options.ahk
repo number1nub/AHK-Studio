@@ -33,7 +33,7 @@ Options(x:=0){
 	sc:=csc(),onoff:=settings.ssn("//options/@" A_ThisLabel).text?0:1,att:=[],att[A_ThisLabel]:=onoff,settings.add("options",att),togglemenu(A_ThisLabel),v.options[A_ThisLabel]:=onoff,sc[list[A_ThisLabel]](onoff),option:=settings.ssn("//options"),ea:=settings.ea(option)
 	for c,d in s.main{
 		for a,b in ea{
-			if !IsObject(List[a]){
+			if(!IsObject(List[a])){
 				if(a="Hide_Indentation_Guides")
 					b:=b?0:1
 				d[list[a]](b)
@@ -85,7 +85,7 @@ Options(x:=0){
 	if(A_ThisLabel="small_icons")
 		return m("Requires that you restart Studio to take effect.")
 	if(A_ThisLabel="Highlight_Current_Area"){
-		if onoff
+		if(onoff)
 			hltline()
 		Else
 			sc:=csc(),sc.2045(2),sc.2045(3)

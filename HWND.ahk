@@ -1,6 +1,6 @@
 hwnd(win,hwnd=""){
 	static window:=[]
-	if win=get
+	if(win="get")
 		return window
 	if(win.rem){
 		GUIKeep.save(win.rem)
@@ -12,9 +12,9 @@ hwnd(win,hwnd=""){
 		window[win.rem]:=""
 		WinActivate,% hwnd([1])
 	}
-	if IsObject(win)
+	if(IsObject(win))
 		return "ahk_id" window[win.1]
-	if !hwnd
+	if(!hwnd)
 		return window[win]
 	window[win]:=hwnd
 }

@@ -39,7 +39,7 @@ Menu(menuname){
 		Run,"%plugin%" %option%
 		return
 	}
-	if IsFunc(item)
+	if(IsFunc(item))
 		%item%()
 	else
 		SetTimer,%item%,-1

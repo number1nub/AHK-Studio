@@ -1,6 +1,6 @@
 Replace_Selected(){
 	sc:=csc(),OnMessage(6,""),replace:=InputBox(sc.sc,"Replace Selected","Input text to replace what is selected"),clip:=Clipboard
-	if ErrorLevel
+	if(ErrorLevel)
 		return
 	for a,b in StrSplit("``r,``n,``r``n,\r,\n,\r\n",",")
 		replace:=RegExReplace(replace,"i)\Q" b "\E","`n")

@@ -44,11 +44,9 @@ Open(filelist="",show=""){
 		return files.ssn("//main[@file='" StrSplit(filelist,"`n").1 "']/file/@tv").text,PERefresh()
 		scanfiles:
 		allfiles:=files.sn("//file")
-		;tick:=A_TickCount ;#[Remove]
 		while,aa:=allfiles.item[A_Index-1]
 			Code_Explorer.scan(aa)
 		WinSetTitle,% hwnd([1]),,% "AHK Studio - " current(3).file
-		;m(fc,A_TickCount-tick,"here :)") ;#[Remove]
 		if(v.options.Hide_Code_Explorer!=1)
 			code_explorer.refresh_code_explorer()
 		return

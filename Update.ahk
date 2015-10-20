@@ -10,7 +10,7 @@ Update(info){
 		return [update,updated]
 	if(info.file){
 		update[info.file]:=info.text
-		if !info.load
+		if(!info.load)
 			updated[info.file]:=1
 		return
 	}
@@ -30,19 +30,19 @@ Update(info){
 				Loop,% end-line
 				{
 					style:=sc.2533(line+(A_Index-1))
-					if style in 0,31,33,48
+					if(style~="(0|31|33|48)")
 						sc.2242(4,1),sc.2240(4,5),sc.2532(line+(A_Index-1),30)
 				}
 			}Else{
 				style:=sc.2533(line)
-				if style in 0,31,33,48
+				if(style~="(0|31|33|48)")
 					sc.2242(4,1),sc.2240(4,5),sc.2532(line,30)
 			}
 			if(sc.2570>1){
 				Loop,% sc.2570
 				{
 					line:=sc.2166(sc.2577(A_Index-1)),style:=sc.2533(line)
-					if style in 0,31,33,48
+					if(style~="(0|31|33|48)")
 						sc.2242(4,1),sc.2240(4,5),sc.2532(line,30)
 				}
 			}

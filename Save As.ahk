@@ -5,7 +5,7 @@ Save_As(){
 	if(ErrorLevel||newfile="")
 		return
 	newfile:=SubStr(newfile,-3)=".ahk"?newfile:newfile ".ahk"
-	if FileExist(newfile)
+	if(FileExist(newfile))
 		return m("File exists... Please choose another")
 	filelist:=sn(current(1),"descendant::*")
 	SplitPath,newfile,newfn,newdir

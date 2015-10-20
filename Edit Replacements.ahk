@@ -13,14 +13,14 @@ Edit_Replacements(){
 		ControlGetText,value,Edit%b%,% hwnd([7])
 		info[a]:=value
 	}
-	if item:=settings.ssn("//replacements/replacement[@replace='" info.replacement "']")
+	if(item:=settings.ssn("//replacements/replacement[@replace='" info.replacement "']"))
 		item.text:=info.value,LV_Modify(LV_GetNext(),"Col2",info.value)
 	return
 	eradd:
 	rep:=newwin[]
-	if !(rep.replacement&&rep.value)
+	if(!(rep.replacement&&rep.value))
 		return m("both values are required")
-	if !settings.ssn("//replacements/*[@replace='" rep.value "']")
+	if(!settings.ssn("//replacements/*[@replace='" rep.value "']"))
 		settings.Add("replacements/replacement",{replace:rep.value},rep.replacement,1),LV_Add("",rep.value,rep.replacement)
 	Loop,2
 		ControlSetText,Edit%A_Index%

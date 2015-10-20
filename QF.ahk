@@ -14,12 +14,10 @@ QF(){
 	opos:=select.opos,select:=[],select.opos:=opos?opos:sc.2008,select.items:=[],text:=sc.getuni()
 	if(sc.2508(0,start:=quickfind[sc.2357]+1)!=""){
 		end:=sc.2509(0,start)
-		if end
+		if(end)
 			text:=SubStr(text,1,end)
 	}
-	GuiControl,1:+g,% sc.sc
-	GuiControl,1:-Redraw,% sc.sc
-	pos:=start?start:1,pos:=pos=0?1:pos,mainsel:="",index:=1,break:=0
+	sc.Enable(),pos:=start?start:1,pos:=pos=0?1:pos,mainsel:="",index:=1,break:=0
 	if(!IsObject(minmax))
 		minmax:=[],minmax.1:={min:0,max:sc.2006},delete:=1
 	for a,b in MinMax{
@@ -30,8 +28,10 @@ QF(){
 				Break,2
 			}
 			if(found.Count()){
-				if(!found.len(A_Index))
-					Break,2
+				/*
+					if(!found.len(A_Index))
+						Break
+				*/
 				Loop,% found.Count()
 					ns:=StrPut(SubStr(search,1,found.Pos(A_Index)),"utf-8")-1,select.items.push({start:start+ns,end:start+ns+StrPut(found[A_Index])-1}),pos:=found.Pos(A_Index)+found.len(A_Index)
 			}else{
@@ -53,10 +53,7 @@ QF(){
 		}
 		if(num>=0)
 			sc.2574(num)
-	}select:=[]
-	GuiControl,1:+Redraw,% sc.sc
-	GuiControl,1:+gnotify,% sc.sc
-	CenterSel()
+	}select:=[],sc.Enable(1),CenterSel()
 	return
 	next:
 	sc:=csc(),sc.2606(),sc.2169()
@@ -72,9 +69,8 @@ QF(){
 		minmax:=[]
 	Loop,% sc.2570
 		o:=[],o[sc.2577(A_Index-1)]:=1,o[sc.2579(A_Index-1)]:=1,minmax.Insert({min:o.MinIndex(),max:o.MaxIndex()})
-	for a,b in minmax{
+	for a,b in minmax
 		sc.2504(b.min,b.max-b.min)
-	}
 	return
 	Quick_Find:
 	if(v.options.Auto_Set_Area_On_Quick_Find)
@@ -102,10 +98,8 @@ QF(){
 		replace()
 	else
 		marginwidth()
-	if(v.options.full_auto){
-		;GuiControl,1:-Redraw,% sc.sc
+	if(v.options.full_auto)
 		SetTimer,full,-10
-	}
 	return
 	full:
 	sc:=csc()
