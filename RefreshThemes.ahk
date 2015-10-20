@@ -8,7 +8,7 @@ RefreshThemes(){
 	for win,b in hwnd("get"){
 		if win>99
 			return
-		winget,controllist,ControlList,% "ahk_id" b
+		WinGet,controllist,ControlList,% "ahk_id" b
 		Gui,%win%:Default
 		Gui,Color,% RGB(ea.Background),% RGB(ea.Background)
 		loop,Parse,ControlList,`n

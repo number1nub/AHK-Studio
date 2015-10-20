@@ -39,6 +39,7 @@ return
 #Include Center.ahk
 #Include CenterSel.ahk
 #Include Changehotkey.ahk
+#Include Check For Edited.ahk
 #Include Class Code Explorer.ahk
 #Include Class FTP.ahk
 #Include Class Icon Browser.ahk
@@ -93,6 +94,7 @@ return
 #Include Goto.ahk
 #Include Gui.ahk
 #Include GUIKeep.ahk
+#Include Highlight To Matching Brace.ahk
 #Include History.ahk
 #Include HK.ahk
 #Include HltLine.ahk
@@ -106,6 +108,7 @@ return
 #Include Jump To.ahk
 #Include Keywords.ahk
 #Include LastFiles.ahk
+#Include LButton.ahk
 #Include ListVars.ahk
 #Include LV Select.ahk
 #Include Margin Left.ahk
@@ -116,6 +119,7 @@ return
 #Include Move Selected Lines Down.ahk
 #Include Move Selected Lines Up.ahk
 #Include MsgBox.ahk
+#Include New Caret.ahk
 #Include New Scintilla Window.ahk
 #Include New Segment.ahk
 #Include New.ahk
@@ -135,6 +139,7 @@ return
 #Include Plugins.ahk
 #Include PosInfo.ahk
 #Include Previous File.ahk
+#Include Previous Found.ahk
 #Include Previous Scripts.ahk
 #Include Project Folder.ahk
 #Include Publish.ahk
@@ -147,6 +152,7 @@ return
 #Include RefreshThemes.ahk
 #Include RegisterID.ahk
 #Include RelativePath.ahk
+#Include Remove Current Selection.ahk
 #Include Remove Scintilla Window.ahk
 #Include Remove Segment.ahk
 #Include Rename Current Segment.ahk
@@ -162,10 +168,13 @@ return
 #Include Save As.ahk
 #Include Save.ahk
 #Include SaveGUI.ahk
+#Include Scratch Pad.ahk
 #Include ScrollWheel.ahk
 #Include Search Label.ahk
 #Include Search.ahk
 #Include Segment From Selection.ahk
+#Include Select Current Word.ahk
+#Include Select Next Duplicate.ahk
 #Include SelectAll.ahk
 #Include Set As Default Editor.ahk
 #Include Set.ahk
@@ -191,18 +200,10 @@ return
 #Include var.ahk
 #Include Widths.ahk
 #Include WinPos.ahk
+#Include Words In Document.ahk
 ;plugin
 #Include Quick Scintilla Code Lookup.ahk
 #Include Scintilla Code Lookup.ahk
 #Include Scintilla.ahk
 ;/plugin
-#Include Check For Edited.ahk
-#Include LButton.ahk
-#Include Select Next Duplicate.ahk
-#Include Scratch Pad.ahk
-#Include Remove Current Selection.ahk
-#Include Words In Document.ahk
-#Include Highlight To Matching Brace.ahk
-#Include Select Current Word.ahk
-#Include Previous Found.ahk
-#Include New Caret.ahk
+#Include Refresh Current Project.ahk
