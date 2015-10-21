@@ -85,6 +85,7 @@
 			<menu name="Center Caret" clean="Center_Caret" option="1"></menu>
 			<menu name="Check For Edited Files On Focus" clean="Check_For_Edited_Files_On_Focus" option="1"></menu>
 			<menu name="Disable Auto Complete" clean="Disable_Auto_Complete" option="1"></menu>
+			<menu name="Disable Auto Complete In Quotes" clean="Disable_Auto_Complete_In_Quotes"></menu>
 			<menu name="Disable Auto Complete While Tips Are Visible" clean="Disable_Auto_Complete_While_Tips_Are_Visible" option="1"></menu>
 			<menu name="Disable Auto Delete" clean="Disable_Auto_Delete" option="1"></menu>
 			<menu clean="Disable_Auto_Indent_For_Non_Ahk_Files" name="Disable Auto Indent For Non Ahk Files" option="1"></menu>
@@ -256,5 +257,5 @@
 			<menu clean="Upload_Menus" hotkey="" name="Upload Menus" option="" plugin="plugins\Upload Menus.ahk"></menu>
 			<menu clean="XML_Date" hotkey="" name="XML Date" option="" plugin="plugins\xml date.ahk"></menu></menu>
 	</main>
-	<date>20151019224924</date>
+	<date>20151021022234</date>
 </menus>

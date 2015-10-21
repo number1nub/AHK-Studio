@@ -86,12 +86,13 @@ Notify(csc:=""){
 			SetTimer,fix_next,-50
 			return
 		}cpos:=sc.2008,start:=sc.2266(cpos,1),end:=sc.2267(cpos,1),word:=sc.getword()
-		if((StrLen(word)>1&&sc.2102=0&&v.options.Disable_Auto_Complete!=1&&sc.2010(cpos)~="\b(13|1|11|3)\b"=0)){
-			word:=RegExReplace(word,"^\d*"),list:=Trim(v.keywords[SubStr(word,1,1)]),code_explorer.varlist[current(2).file]
-			if(!sc.2202&&v.options.Disable_Auto_Complete_While_Tips_Are_Visible=1){
-			}else
+		if((StrLen(word)>1&&sc.2102=0&&v.options.Disable_Auto_Complete!=1)){
+			if((!sc.2202&&v.options.Disable_Auto_Complete_While_Tips_Are_Visible=1)||(sc.2010(cpos)~="\b(13|1|11|3)\b"=1&&v.options.Disable_Auto_Complete_In_Quotes=1)){
+			}else{
+				word:=RegExReplace(word,"^\d*"),list:=Trim(v.keywords[SubStr(word,1,1)]),code_explorer.varlist[current(2).file]
 				if(list&&instr(list,word))
 					sc.2100(StrLen(word),list)
+			}
 		}style:=sc.2010(sc.2008-2)
 		settimer,context,-150
 		c:=fn.ch
