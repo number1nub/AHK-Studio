@@ -188,10 +188,13 @@
 				<menu name="File Search" hotkey="+!O" clean="File_Search"></menu>
 				<menu name="Function Search" clean="Function_Search" hotkey="+^9"></menu>
 				<menu name="Hotkey Search" hotkey="+^7" clean="Hotkey_Search"></menu>
+				<menu name="Instance Search" clean="Instance_Search"></menu>
 				<menu name="Menu Search" hotkey="!M" clean="Menu_Search"></menu>
 				<menu name="Method Search" hotkey="^!M" clean="Method_Search"></menu>
 				<menu name="Omni Search" hotkey="^!O" clean="Omni_Search"></menu>
-				<menu name="Search Label" clean="Search_Label" hotkey="+^;"></menu></menu>
+				<menu name="Property Search" clean="Property_Search"></menu>
+				<menu name="Search Label" clean="Search_Label" hotkey="+^;"></menu>
+				<menu name="Variable Search" clean="Variable_Search"></menu></menu>
 			<menu name="Previous File" hotkey="+!UP" clean="Previous_File"></menu>
 			<menu name="Quick Scintilla Code Lookup" hotkey="+ESCAPE" clean="Quick_Scintilla_Code_Lookup"></menu>
 			<menu name="Refresh Code Explorer" clean="Refresh_Code_Explorer"></menu>
