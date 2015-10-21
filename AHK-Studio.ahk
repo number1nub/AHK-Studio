@@ -208,3 +208,4 @@ return
 #Include Scintilla.ahk
 ;/plugin
 #Include Refresh Current Project.ahk
+#Include Debug Settings.ahk
