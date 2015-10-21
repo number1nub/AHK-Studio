@@ -2,7 +2,7 @@ Command_Help(){
 	static stuff,hwnd
 	sc:=csc(),found1:=context(1)
 	RegRead,outdir,HKEY_LOCAL_MACHINE,SOFTWARE\AutoHotkey,InstallDir
-	if(!(outdir))
+	if(!outdir)
 		SplitPath,A_AhkPath,,outdir
 	if(!found1)
 		RegExMatch(sc.getline(sc.2166(sc.2008)),"[\s+]?(\w+)",found)
@@ -21,7 +21,7 @@ Command_Help(){
 					url:="mk:@MSITStore:" outdir "/AutoHotkey.chm::/docs/Functions.htm#" found1
 			}
 		}
-		if(!help:=GetWebBrowser()){
+		if(WinExist("AutoHotkey Help ahk_class HH Parent")=0){
 			Run,% outdir "\AutoHotkey.chm"
 			WinWaitActive,AutoHotkey Help,,3
 			Sleep,300
@@ -29,7 +29,7 @@ Command_Help(){
 				return m("Please open the help file.")
 		}
 		help.navigate(url)
-		WinActivate,AutoHotkey Help
+		WinActivate,AutoHotkey Help ahk_class HH Parent
 	}
 	return
 }

@@ -1,6 +1,5 @@
 #SingleInstance,Off
 DetectHiddenWindows,On
-;#SingleInstance,Force
 CoordMode,ToolTip,Screen
 #NoEnv
 #MaxHotkeysPerInterval,5000

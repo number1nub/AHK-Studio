@@ -8,9 +8,5 @@ Delete_Project(x:=0){
 	if(v.options.Hide_Code_Explorer!=1)
 		Code_Explorer.Refresh_Code_Explorer()
 	SplitPath,project,,dir
-	RunWait,% comspec " /C RD /S /Q " Chr(34) dir Chr(34),,Hide
-	/*
-		make new close into just close
-		I think that's it.
-	*/
+	FileRecycle,%dir%
 }

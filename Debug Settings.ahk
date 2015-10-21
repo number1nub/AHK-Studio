@@ -2,7 +2,7 @@ Debug_Settings(){
 	static values:=["max_depth","max_children"],newwin
 	newwin:=new GUIKeep("Debug_Settings"),ea:=settings.ea("//features")
 	for a,b in values
-		newwin.add("Text,xm," b ":"),newwin.Add("Edit,x+M w100 v" b "," (ea[b]?ea[b]:0))
+		newwin.add("Text,xm y+3 Section," b ":"),newwin.Add("Edit,x+M ys-3 w100 v" b "," (ea[b]?ea[b]:0))
 	newwin.Add("Button,xm gSave_Debug_Settings,Save Settings"),newwin.Show("Debug Settings")
 	return
 	Debug_SettingsGuiEscape:
