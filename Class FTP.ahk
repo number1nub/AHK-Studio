@@ -24,7 +24,7 @@ Class FTP{
 		file:=FileOpen("temp\" namenoext ".text",2),upinfo:="",info:=vversion.sn("//info[@file='" name "']/versions/version")
 		while,in:=info.item[A_Index-1]
 			upinfo.=ssn(in,"@number").text "`r`n" in.text "`r`n"
-		file.write(upinfo),file.seek(0),List[namenoext ".text"]:=file
+		upinfo:=text(upinfo),file.write(upinfo),file.seek(0),List[namenoext ".text"]:=file
 		return list
 	}
 	Put(file,dir,compile,existing:=""){
@@ -109,4 +109,7 @@ Class FTP{
 		DllCall("FormatMessage","UInt",0x00000800,"PTR",this.library,"UInt",error,"UInt",0,"Str",buffer,"UInt",size,"PTR",0)
 		return buffer
 	}
+}
+Text(text){
+	return RegExReplace(text,"\x7f","`r`n")
 }

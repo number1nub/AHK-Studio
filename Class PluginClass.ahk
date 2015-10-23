@@ -133,7 +133,7 @@ Class PluginClass{
 		m(x)
 	}
 	__Delete(){
-		m("ok")
+		;m("ok")
 	}
 	StudioPath(){
 		return A_ScriptFullPath

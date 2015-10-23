@@ -66,7 +66,19 @@ Notify(csc:=""){
 				SetTimer,goto,-100
 			else if(v.word="settimer")
 				SetTimer,showlabels,-80
-			else
+			else if(syntax:=commands.ssn("//Commands/commands[text()='" v.word "']/@syntax").text){
+				if(SubStr(syntax,1,1)="(")
+					SetTimer,AutoParen,-40
+				else
+					SetTimer,automenu,-100
+				return
+				AutoParen:
+				if(sc.2007(sc.2008-1)!=40&&sc.2007(sc.2008)!=40)
+					sc.2003(sc.2008,"()"),sc.2025(sc.2008+1)
+				if(sc.2007(sc.2008)=40)
+					sc.2025(sc.2008+1)
+				return
+			}else
 				SetTimer,automenu,-100
 		}
 	}if(code=2007)

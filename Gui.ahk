@@ -98,11 +98,11 @@ Gui(){
 		}else
 			openfilelist.=oo.text "`n"
 	}
-	if(openfilelist)
+	hk(1),hotkeys([1],enter)
+	if(openfilelist){
 		Open(trim(openfilelist,"`n"))
-	else
+	}else
 		New(1)
-	last:=settings.sn("//last/*"),hk(1),hotkeys([1],enter),tv(files.ssn("//file[@file='" last.item[0].text "']/@tv").text,1)
 	if(last.length>1){
 		while,file:=last.item[A_Index-1]{
 			if(A_Index=1)
@@ -111,19 +111,20 @@ Gui(){
 		}
 		csc({hwnd:s.main.1.sc}).2400
 	}
-	SetTimer,scanfiles,-500
+	SetTimer,scanfiles,-100
 	WinSet,Redraw,,% hwnd([1])
 	OnExit,Exit
 	v.opening:=0
 	GuiControl,1:+gtv,SysTreeView321
-	if(select:=settings.ssn("//open/file[@select='1']"),fn:=select.text,select.RemoveAttribute("select"))
-		tv(files.ssn("//file[@file='" fn "']/@tv").text)
+	if(select:=settings.ssn("//open/file[@select='1']"))
+		tv(files.ssn("//file[@file='" select.text "']/@tv").text,1)
 	else if(select:=settings.ssn("//last/file").text)
-		tv(files.ssn("//file[@file='" select "']/@tv").text)
+		tv(files.ssn("//file[@file='" select "']/@tv").text,1)
 	else
-		tv(files.ssn("//file[@tv!='']/@tv").text)
+		tv(files.ssn("//file[@tv!='']/@tv").text,1)
 	while,ss:=settings.ssn("//open/file[@select='1']")
 		ss.RemoveAttribute("select")
+	csc(1)
 	return
 	GuiClose:
 	SetTimer,Exit,-1

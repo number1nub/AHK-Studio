@@ -38,23 +38,22 @@ Context(return=""){
 				break
 	}}if(word=""||word="if"){
 		RegExMatch(string,"O)^\s*\W*(\w+)",word),word:=v.kw[word.1]?v.kw[word.1]:word.1,startpos:=start,loopword:=word,loopstring:=string,build:=word
-		if((main:=commands.sn("//Context/" word "/*")).length){
-			if(!commands.ssn("//Context/" word "/syntax"))
-				ea:=xml.ea(commands.ssn("//Context/" word "/list")),synmatch.push(ea.add word " [" ea.list "]")
-			else
-				while,mm:=main.item[A_Index-1],ea:=xml.ea(mm){
-					if(mm.text~="i)\b" loopword "\b"&&loopword){
-						list:=RegExReplace(ea.list," ","|"),loopstring:=RegExReplace(loopstring,"i)^(\W*\b" loopword "\b\W+)")
-						if(RegExMatch(loopstring,"Oi)\b(" list ")\b",found))
-							loopword:=found.1,build.="," loopword
-						if(mm.nodename="syntax"){
-							build:=word="if"?word " " ea.syntax:Trim(build,",") " " ea.syntax
-							synmatch.push(build)
-							Break
-		}}}}else if(word){
-			ww:=v.kw[word]?v.kw[word]:v.kw["#" word]
-			if(syn:=commands.ssn("//Commands/Commands/commands[text()='" ww "']/@syntax").text)
-				synmatch.push(ww " " syn)
+		if((list:=v.context[word])&&word!="if"){
+			for a,b in StrSplit(string,","){
+				if(RegExMatch(b,"Oi)\b(" list ")\b",found))
+					RegExMatch(list,"Oi)\b(" found.1 ")\b",found),last:=found.1,build.=a_index=1?",":b ","
+				else
+					Break
+			}
+			if(syntax:=commands.ssn("//Context/" word "/descendant-or-self::syntax[contains(text(),'" last "')]/@syntax").text)
+				synmatch.push(Trim(build,",") " " syntax)
+		}else{
+			for a,b in StrSplit(string," ")
+				if(RegExMatch(b,"Oi)\b(" list ")\b",found)&&InStr(b,"if")=0){
+					last:=found.1,build.=a_index=1?",":b ","
+					break
+				}
+			synmatch.push("if " commands.ssn("//Context/if/descendant-or-self::syntax[text()='" (last?last:"if") "']/@syntax").text)
 		}
 	}if(wordstartpos-start>0)
 		string:=LTrim(SubStr(string,wordstartpos-start),",")

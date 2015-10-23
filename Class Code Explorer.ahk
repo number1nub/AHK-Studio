@@ -94,8 +94,6 @@ Class Code_Explorer{
 		fz:=cexml.sn("//files/main")
 		while,fn:=fz.Item[A_Index-1]{
 			things:=sn(fn,"descendant::info"),filename:=ssn(fn,"@file").text
-			if(things.length=0)
-				Continue
 			SplitPath,filename,file
 			Gui,1:Default
 			Gui,1:TreeView,SysTreeView322
@@ -114,6 +112,7 @@ Class Code_Explorer{
 			}
 		}
 		GuiControl,1:+Redraw,SysTreeView322
+		Gui,1:TreeView,SysTreeView321
 		return
 	}
 	cej(){

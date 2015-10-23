@@ -13,7 +13,7 @@ ComObjError(0)
 CoordMode,ToolTip,Screen
 if(!FileExist("lib"))
 	FileCreateDir,Lib
-global v:=[],settings:=new xml("settings","lib\Settings.xml"),files:=new xml("files"),menus:=new xml("menus","lib\menus.xml"),commands:=new xml("commands","lib\commands.xml"),positions:=new xml("positions","lib\positions.xml"),vversion,access_token,vault:=new xml("vault","lib\Vault.xml"),preset,scintilla,bookmarks,cexml:=new xml("code_explorer"),notesxml,language:=new xml("language","lib\en-us.xml"),vversion:=new xml("version","lib\version.xml")
+global v:=[],settings:=new xml("settings","lib\Settings.xml"),files:=new xml("files"),menus:=new xml("menus","lib\menus.xml"),commands:=new xml("commands","lib\commands.xml"),positions:=new xml("positions","lib\positions.xml"),vversion,access_token,vault:=new xml("vault","lib\Vault.xml"),preset,scintilla,bookmarks,cexml:=new xml("code_explorer"),notesxml,language:=new xml("language","lib\en-us.xml"),vversion:=new xml("version","lib\version.xml"),Custom_Commands:=new XML("custom","lib\Custom Commands.xml")
 scintilla:=new xml("scintilla","lib\scintilla.xml")
 FileCheck(file)
 if(FileExist("AHKStudio.ico"))
@@ -208,3 +208,5 @@ return
 ;/plugin
 #Include Refresh Current Project.ahk
 #Include Debug Settings.ahk
+#Include New File Template.ahk
+#Include Default.ahk

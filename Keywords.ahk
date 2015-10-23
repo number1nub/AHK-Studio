@@ -19,5 +19,13 @@ Keywords(){
 	Loop,Parse,all,%a_space%
 		v.keywords[SubStr(A_LoopField,1,1)].=A_LoopField " "
 	v.all:=all
+	if(node:=Custom_Commands.ssn("//Context").clonenode(1))
+		rem:=commands.ssn("//Context"),rem.ParentNode.RemoveChild(rem),commands.ssn("//*").AppendChild(node)
+	v.context:=[],list:=commands.sn("//Context/*")
+	while,ll:=list.item[A_Index-1]{
+		cl:=RegExReplace(ll.text," ","|")
+		Sort,cl,UD|
+		v.context[ll.NodeName]:=cl
+	}
 	return
 }
