@@ -5,7 +5,6 @@ CoordMode,ToolTip,Screen
 #MaxHotkeysPerInterval,5000
 #HotkeyInterval,1
 SetWorkingDir,%A_ScriptDir%
-tick:=A_TickCount
 file=%1%
 SetBatchLines,-1
 ;download complete
@@ -14,13 +13,16 @@ CoordMode,ToolTip,Screen
 if(!FileExist("lib"))
 	FileCreateDir,Lib
 global v:=[],settings:=new xml("settings","lib\Settings.xml"),files:=new xml("files"),menus:=new xml("menus","lib\menus.xml"),commands:=new xml("commands","lib\commands.xml"),positions:=new xml("positions","lib\positions.xml"),vversion,access_token,vault:=new xml("vault","lib\Vault.xml"),preset,scintilla,bookmarks,cexml:=new xml("code_explorer"),notesxml,language:=new xml("language","lib\en-us.xml"),vversion:=new xml("version","lib\version.xml"),Custom_Commands:=new XML("custom","lib\Custom Commands.xml")
-scintilla:=new xml("scintilla","lib\scintilla.xml")
-FileCheck(file)
+scintilla:=new xml("scintilla","lib\scintilla.xml"),FileCheck(file),v.pluginversion:=1
 if(FileExist("AHKStudio.ico"))
 	Menu,Tray,Icon,AHKStudio.ico
 new omni_search_class(),v.filelist:=[],v.options:=[],var(),keywords(),Gui(),v.match:={"{":"}","[":"]","<":">","(":")",Chr(34):Chr(34),"'":"'","%":"%"},v.filescan:=[]
 ObjRegisterActive(pluginclass),preset:=new xml("preset","lib\preset.xml")
 SetWorkingDir,%A_ScriptDir%
+ea:=settings.ea("//options")
+for a,b in ea
+	v.options[a]:=b
+v.options.full_auto:=settings.ssn("//Auto_Indent/@Full_Auto").text
 return
 SetTimer,Color
 GuiDropFiles:
@@ -38,7 +40,6 @@ return
 #Include BraceSetup.ahk
 #Include Center.ahk
 #Include CenterSel.ahk
-#Include Changehotkey.ahk
 #Include Check For Edited.ahk
 #Include Class Code Explorer.ahk
 #Include Class FTP.ahk
@@ -63,6 +64,8 @@ return
 #Include Copy.ahk
 #Include CSC.ahk
 #Include Current.ahk
+#Include Debug Settings.ahk
+#Include Default.ahk
 #Include DefaultFont.ahk
 #Include Delete Matching Brace.ahk
 #Include Delete Project.ahk
@@ -113,13 +116,13 @@ return
 #Include LV Select.ahk
 #Include Margin Left.ahk
 #Include Margin Width.ahk
-#Include Menu Editor.ahk
 #Include Menu.ahk
 #Include MenuWipe.ahk
 #Include Move Selected Lines Down.ahk
 #Include Move Selected Lines Up.ahk
 #Include MsgBox.ahk
 #Include New Caret.ahk
+#Include New File Template.ahk
 #Include New Scintilla Window.ahk
 #Include New Segment.ahk
 #Include New.ahk
@@ -145,6 +148,7 @@ return
 #Include Publish.ahk
 #Include QF.ahk
 #Include QFS.ahk
+#Include Refresh Current Project.ahk
 #Include Refresh Plugins.ahk
 #Include Refresh Project Explorer.ahk
 #Include Refresh Project Treeview.ahk
@@ -206,7 +210,3 @@ return
 #Include Scintilla Code Lookup.ahk
 #Include Scintilla.ahk
 ;/plugin
-#Include Refresh Current Project.ahk
-#Include Debug Settings.ahk
-#Include New File Template.ahk
-#Include Default.ahk

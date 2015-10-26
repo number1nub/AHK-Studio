@@ -15,3 +15,18 @@ Run(){
 	if(file=A_ScriptFullPath)
 		ExitApp
 }
+Run_As_U32(){
+	Run_As("AutoHotkeyU32")
+}
+Run_As_U64(){
+	Run_As("AutoHotkeyU64")
+}
+Run_As_Ansii(){
+	Run_As("AutoHotkeyA32")
+}
+Run_As(exe){
+	file:=current(2).file
+	SplitPath,A_AhkPath,,dir
+	SplitPath,file,,fdir
+	Run,%dir%\%exe% "%file%",%fdir%
+}

@@ -1,8 +1,13 @@
 FileCheck(file){
-	static dates:={commands:{date:20151023111914,loc:"lib\commands.xml",url:"http://files.maestrith.com/AHK-Studio/commands.xml",type:1},menus:{date:20151021022234,loc:"lib\menus.xml",url:"http://files.maestrith.com/AHK-Studio/menus.xml",type:2},scilexer:{date:20150606000000,loc:"SciLexer.dll",url:"http://files.maestrith.com/AHK-Studio/SciLexer.dll",type:1},icon:{date:20150914131604,loc:"AHKStudio.ico",url:"http://files.maestrith.com/AHK-Studio/AHKStudio.ico",type:3},Studio:{date:20151021125614,loc:A_MyDocuments "\Autohotkey\Lib\Studio.ahk",url:"https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Lib/Studio.ahk",type:1}}
+	static dates:={commands:{date:20151023111914,loc:"lib\commands.xml",url:"http://files.maestrith.com/AHK-Studio/commands.xml",type:1},menus:{date:20151025135034,loc:"lib\menus.xml",url:"http://files.maestrith.com/AHK-Studio/menus.xml",type:2},scilexer:{date:20150606000000,loc:"SciLexer.dll",url:"http://files.maestrith.com/AHK-Studio/SciLexer.dll",type:1},icon:{date:20150914131604,loc:"AHKStudio.ico",url:"http://files.maestrith.com/AHK-Studio/AHKStudio.ico",type:3},Studio:{date:20151021125614,loc:A_MyDocuments "\Autohotkey\Lib\Studio.ahk",url:"https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Lib/Studio.ahk",type:1}}
 	if(!FileExist(A_MyDocuments "\Autohotkey")){
 		FileCreateDir,% A_MyDocuments "\Autohotkey"
 		FileCreateDir,% A_MyDocuments "\Autohotkey\Lib"
+	}
+	if(!FileExist("plugins\settings.ahk")){
+		SplashTextOn,300,50,Downloading Settings.ahk,Please Wait...
+		FileCreateDir,Plugins
+		URLDownloadToFile,https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Settings.ahk,plugins\Settings.ahk
 	}
 	if(file){
 		if(file){
@@ -28,10 +33,8 @@ FileCheck(file){
 		FileGetTime,time,% b.loc,M
 		loc:=b.loc
 		SplitPath,loc,,locdir
-		if(FileExist(locdir)=""&&InStr(locdir,".")!=0){
-			m("make it!",locdir,loc,"hmm",InStr(localdir,"."))
+		if(FileExist(locdir)=""&&InStr(locdir,".")!=0)
 			FileCreateDir,%locdir%
-		}
 		if(b.type=2){
 			if(menus.ssn("//date").text!=b.date){
 				SplashTextOn,300,100,Downloading Menus XML,Please Wait...
@@ -40,8 +43,7 @@ FileCheck(file){
 					menus.xml.loadxml(temp[])
 				else{
 					menu:=temp.sn("//*")
-					while,mm:=menu.item[A_Index-1]{
-						ea:=xml.ea(mm)
+					while,mm:=menu.item[A_Index-1],ea:=xml.ea(mm){
 						if(!ea.clean)
 							Continue
 						if(!menus.ssn("//*[@clean='" ea.clean "']")){
@@ -55,13 +57,14 @@ FileCheck(file){
 								if(next){
 									parent.insertbefore(new,b)
 									break
-								}
-								if(a=nn.clean)
+								}if(a=nn.clean)
 									next:=1
 					}}}options:=temp.sn("//*[@option='1']")
 					while,oo:=options.item[A_Index-1],ea:=xml.ea(oo)
 						menus.ssn("//*[@clean='" ea.clean "']").SetAttribute("option",1)
-				}menus.add("date",,b.date),menus.save(1)
+				}menus.add("date",,b.date),menus.save(1),options:=temp.sn("//*[@clean='Options']/*")
+				while,oo:=options.item[A_Index-1],ea:=xml.ea(oo)
+					menus.ssn("//*[@clean='" ea.clean "']").SetAttribute("option",1)
 		}}else if(time!=b.date){
 			if(b.type=1){
 				SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....

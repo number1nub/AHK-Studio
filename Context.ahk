@@ -44,17 +44,18 @@ Context(return=""){
 					RegExMatch(list,"Oi)\b(" found.1 ")\b",found),last:=found.1,build.=a_index=1?",":b ","
 				else
 					Break
-			}
-			if(syntax:=commands.ssn("//Context/" word "/descendant-or-self::syntax[contains(text(),'" last "')]/@syntax").text)
+			}if(syntax:=commands.ssn("//Context/" word "/descendant-or-self::syntax[contains(text(),'" last "')]/@syntax").text)
 				synmatch.push(Trim(build,",") " " syntax)
-		}else{
+		}else if(word="if"){
 			for a,b in StrSplit(string," ")
 				if(RegExMatch(b,"Oi)\b(" list ")\b",found)&&InStr(b,"if")=0){
 					last:=found.1,build.=a_index=1?",":b ","
 					break
 				}
 			synmatch.push("if " commands.ssn("//Context/if/descendant-or-self::syntax[text()='" (last?last:"if") "']/@syntax").text)
-		}
+		}else
+			if(syntax:=commands.ssn("//Commands/commands[text()='#" word "' or text()='" word "']/@syntax").text)
+				synmatch.push(word " " syntax)
 	}if(wordstartpos-start>0)
 		string:=LTrim(SubStr(string,wordstartpos-start),",")
 	if(return)

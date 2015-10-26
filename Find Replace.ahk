@@ -4,6 +4,10 @@ Find_Replace(){
 	for a,b in ea
 		value[a]:=b?"Checked":""
 	newwin.Add("Text,,Find","Edit,w200 vfind","Text,,Replace","Edit,w200 vreplace","Checkbox,vregex " value.regex ",Regex","Checkbox,vcs " value.cs ",Case Sensitive","Checkbox,vgreed " value.greed ",Greed","Checkbox,vml " value.ml ",Multi-Line","Checkbox,xm vsegment " value.segment ",Current Segment Only","Checkbox,xm vcurrentsel hwndcs gcurrentsel " value.currentsel ",In Current Selection","Button,gfrfind Default,&Find","Button,x+5 gfrreplace,&Replace","Button,x+5 gfrall,Replace &All"),newwin.Show("Find & Replace"),sc:=csc(),order:=[],order[sc.2585(0)]:=1,order[sc.2587(0)]:=1,last:=(order.MinIndex()!=order.MaxIndex())?sc.textrange(order.MinIndex(),order.MaxIndex()):last,hotkeys([30],{"!e":"frregex"})
+	if(ea.regex&&order.MinIndex()!=order.MaxIndex())
+		for a,b in StrSplit("\.*?+[{|()^$")
+			if(!InStr(last,"\" b))
+				StringReplace,last,last,%b%,\%b%,All
 	if(!value.currentsel)
 		ControlSetText,Edit1,%last%,% hwnd([30])
 	else
@@ -74,7 +78,7 @@ Find_Replace(){
 		text:=update({get:ea.file})
 		if(pos:=RegExMatch(text,find,found,pos)){
 			tv(files.ssn("//file[@file='" ea.file "']/@tv").text)
-			Sleep,200
+			Sleep,300
 			np:=StrPut(SubStr(text,1,pos-1),"utf-8")-1,sc.2160(np,np+StrPut(found.0,"utf-8")-1)
 			return
 		}

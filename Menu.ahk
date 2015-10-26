@@ -1,37 +1,41 @@
-Menu(menuname){
-	v.available:=[],menu:=menus.sn("//" menuname "/descendant::*"),topmenu:=menus.sn("//" menuname "/*"),v.hotkeyobj:=[]
-	Menu,main,UseErrorLevel,On
+Menu(menuname:="main"){
+	v.available:=[],menu:=menus.sn("//" menuname "/descendant::*"),topmenu:=menus.sn("//" menuname "/*"),v.hotkeyobj:=[],track:=[],exist:=[],Exist[menuname]:=1
+	Menu,%menuname%,UseErrorLevel,On
 	while,mm:=topmenu.item[A_Index-1],ea:=xml.ea(mm)
 		if(mm.haschildnodes())
 			Menu,% ea.name,DeleteAll
-	Menu,main,DeleteAll
-	topmenus:=[]
-	while,mm:=menu.item[A_Index-1],ea:=xml.ea(mm){
-		if(mm.nodename="separator")
-			Menu,%parentmenu%,Add
+	Menu,%menuname%,DeleteAll
+	while,aa:=menu.item[A_Index-1],ea:=xml.ea(aa),pea:=xml.ea(aa.ParentNode){
+		parent:=pea.name?pea.name:menuname
 		if(ea.hide)
 			Continue
-		parentmenu:=ssn(mm.ParentNode,"@name").text,parentmenu:=parentmenu?parentmenu:menuname
-		if(mm.haschildnodes()){
-			Menu,%parentmenu%,Add,% ea.name,deadend
-			topmenus.Insert({name:ea.name,parent:parentmenu})
-		}else if(ea.name){
+		if(!aa.haschildnodes()){
+			if(aa.nodename="separator"){
+				Menu,%parent%,Add
+				Continue
+			}
 			if((!IsFunc(ea.clean)&&!IsLabel(ea.clean))&&!FileExist(ea.plugin))
 				Continue
-			hotkey:=ea.hotkey?"`t" convert_hotkey(ea.hotkey):"",v.available[ea.clean]:=1
-			if(ea.hotkey)
-				v.hotkeyobj[ea.hotkey]:=ea.clean
-			Menu,%parentmenu%,Add,% ea.name hotkey,MenuRoute
-			if(value:=settings.ssn("//*/@" ea.clean).text){
-				v.options[ea.clean]:=value
-				Menu,%parentmenu%,ToggleCheck,% ea.name hotkey
-			}
+			exist[parent]:=1
 		}
-		Menu,%Parentmenu%,Icon,% ea.name hotkey,% ea.filename,% ea.icon
+		(aa.haschildnodes())?(track.push({name:ea.name,parent:parent,clean:ea.clean}),route:="deadend"):(route:="MenuRoute")
+		if(ea.hotkey)
+			v.hotkeyobj[ea.hotkey]:=ea.clean
+		hotkey:=ea.hotkey?"`t" convert_hotkey(ea.hotkey):""
+		Menu,%parent%,Add,% ea.name hotkey,menuroute
+		if(value:=settings.ssn("//*/@" ea.clean).text){
+			v.options[ea.clean]:=value
+			Menu,%parent%,ToggleCheck,% ea.name hotkey
+		}if(ea.icon!=""&&ea.filename)
+			Menu,%Parent%,Icon,% ea.name hotkey,% ea.filename,% ea.icon
 	}
-	for a,b in topmenus
+	for a,b in track{
+		if(!Exist[b.name])
+			Menu,% b.parent,Delete,% b.name
 		Menu,% b.parent,Add,% b.name,% ":" b.name
+	}
 	hotkeys([1],v.hotkeyobj)
+	Gui,1:Menu,%menuname%
 	return menuname
 	MenuRoute:
 	item:=clean(A_ThisMenuItem),ea:=menus.ea("//*[@clean='" item "']"),plugin:=ea.plugin,option:=ea.option

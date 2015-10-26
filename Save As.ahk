@@ -22,7 +22,5 @@ Save_As(){
 			FileAppend,% update({get:filename}),%newdir%\%file%
 	}
 	SplashTextOff
-	if(newdir!=dir)
-		Delete_Project(1)
-	Open(newfile),tv(files.ssn("//file[@file='" newfile "']/@tv").text)
+	Close(),Open(newfile),tv(files.ssn("//file[@file='" newfile "']/@tv").text)
 }

@@ -1,4 +1,4 @@
-Open(filelist="",show=""){
+Open(filelist="",show="",Redraw:=1){
 	static root,top
 	for a,b in [19,14,3,11]{
 		if(hwnd(b)){
@@ -39,8 +39,7 @@ Open(filelist="",show=""){
 			gosub,addfile
 			v.filescan.Insert(b)
 		}
-		if(Show)
-			SetTimer,scanfiles,-100
+		SetTimer,scanfiles,-100
 		return files.ssn("//main[@file='" StrSplit(filelist,"`n").1 "']/file/@tv").text,PERefresh()
 		scanfiles:
 		allfiles:=files.sn("//file")
@@ -69,9 +68,9 @@ Open(filelist="",show=""){
 		FileRead,text,Notes\%nne%.txt
 		update({file:A_ScriptDir "\notes\" nne ".txt",text:RegExReplace(text,"\R","`n")})
 	}
-	GuiControl,1:+Redraw,SysTreeView321
+	if(Redraw)
+		GuiControl,1:+Redraw,SysTreeView321
 	if(!v.opening)
 		GuiControl,1:+gtv,SysTreeView321
-	TV_Modify(TV_GetChild(0),"Select Focus Vis")
 	return
 }

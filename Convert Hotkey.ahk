@@ -1,4 +1,4 @@
-convert_hotkey(key){
+Convert_Hotkey(key){
 	StringUpper,key,key
 	if(InStr(key,"^v"))
 		return

@@ -9,6 +9,8 @@ Class PluginClass{
 		return A_ScriptDir
 	}
 	SetTimer(timer,period:=-10){
+		if(!IsFunc(timer)&&!IsLabel(timer))
+			return
 		period:=period>0?-period:period
 		SetTimer,%timer%,%period%
 	}

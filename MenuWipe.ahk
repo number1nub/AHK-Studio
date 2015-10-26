@@ -8,6 +8,6 @@ MenuWipe(x:=0){
 		if(aa.haschildnodes())
 			Menu,main,Delete,% ea.name
 	if(x)
-		Gui,Menu
+		Gui,1:Menu
 	Sleep,100
 }

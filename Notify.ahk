@@ -8,7 +8,7 @@ Notify(csc:=""){
 		return
 	if(info=256||info=512||info=768)
 		return
-	if(code=2029||(code=2007&&WinActive(hwnd([1]))=0)){
+	if(code=2029||(code=2007&&WinActive(hwnd([1]))=0)||csc="setpos"){
 		getpos(),focus:=sc:=csc(),obj:=lastpos[current(3).sc]:=[]
 		if(!WinActive(hwnd([1])))
 			Loop,% sc.2570

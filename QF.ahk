@@ -53,7 +53,7 @@ QF(){
 		}
 		if(num>=0)
 			sc.2574(num)
-	}select:=[],sc.Enable(1),CenterSel()
+	}select:=[],sc.Enable(1),CenterSel(),Notify("setpos")
 	return
 	next:
 	sc:=csc(),sc.2606(),sc.2169()
