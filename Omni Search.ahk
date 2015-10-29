@@ -27,9 +27,8 @@ Omni_Search(start=""){
 	omnisearch:
 	Gui,20:Default
 	GuiControl,20:-Redraw,SysListView321
-	search:=newwin[].search,Select:=[],LV_Delete(),pre:=SubStr(search,1,1)
-	pre:=omni_search_class.prefix[pre]?pre:"",search:=pre?SubStr(search,2):search,sort:=[],stext:=[]
-	if(search="?"){
+	search:=newwin[].search,Select:=[],LV_Delete(),sort:=[],stext:=[]
+	if(InStr(search,"?")){
 		LV_Delete()
 		for a,b in omni_search_class.prefix{
 			info:=a="+"?"Add Function Call":b
@@ -39,22 +38,27 @@ Omni_Search(start=""){
 		Loop,4
 			LV_ModifyCol(A_Index,"AutoHDR")
 		return
-	}
+	}if(RegExMatch(search,"\W")){
+		find:="//*[",pos:=1,replist:=[]
+		while,RegExMatch(search,"O)(\W)",found,pos),pos:=found.Pos(1)+found.len(1){
+			if(pre:=omni_search_class.prefix[found.1]){
+				if(found.1="+"){
+					find:="//main[@file='" current(2).file "']/descendant::*[@type='Class' or @type='Function']"
+					break
+				}else if(pre)
+					add:="@type='" pre "'"
+				find.=A_Index>1?" or " add:add
+				replist.push(found.1)
+			}
+		}
+		for a,b in replist
+			search:=RegExReplace(search,"\Q" b "\E")
+		find.="]"
+	}else
+		find:="//*"
 	for a,b in StrSplit(search)
 		stext[b]:=stext[b]=""?1:stext[b]+1
-	find:=omni_search_class.prefix[pre]
-	if(find="menu")
-		find:="menu/item"
-	else if(pre="+")
-		find:="main[@file='" current(2).file "']/descendant::*[@type='Class' or @type='Function']"
-	else if(find!="file"&&find)
-		find:="files/main/descendant::*[@type='" find "']"
-	else if(find="file")
-		find:="file"
-	else if(find="")
-		find:="*[@type]"
-	list:=cexml.sn("//" find),break:=0,currentparent:=current(2).file
-	;t(list.length)
+	list:=cexml.sn(find),break:=0,currentparent:=current(2).file
 	while,ll:=list.Item[A_Index-1]{
 		if(break){
 			break:=0

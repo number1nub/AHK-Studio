@@ -102,8 +102,8 @@ Class XML{
 		filename:=this.file?this.file:x.1.1,encoding:=ffff.pos=3?"UTF-8":ffff.pos=2?"UTF-16":"CP0",enc:=RegExMatch(this[],"[^\x00-\x7F]")?"utf-16":"utf-8"
 		if(encoding!=enc)
 			FileDelete,%filename%
-		if(Trim(this[])="")
-			return
+		if(this.xml.SelectSingleNode("*").xml="")
+			return m("Errors happened. Reverting to old version of the XML")
 		file:=fileopen(filename,"rw",encoding),file.seek(0),file.write(this[]),file.length(file.position)
 	}
 	ea(path){

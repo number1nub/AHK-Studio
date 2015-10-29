@@ -1,66 +1,51 @@
 Class PluginClass{
 	__New(){
 		return this
-	}
-	file(){
+	}file(){
 		return A_ScriptFullPath
-	}
-	path(){
+	}path(){
 		return A_ScriptDir
-	}
-	SetTimer(timer,period:=-10){
+	}SetTimer(timer,period:=-10){
 		if(!IsFunc(timer)&&!IsLabel(timer))
 			return
 		period:=period>0?-period:period
 		SetTimer,%timer%,%period%
-	}
-	debugwindow(){
+	}debugwindow(){
 		v.debug:=new s(1,{pos:"w200 h200"}),Resize("rebar")
-	}
-	AutoClose(script){
+	}AutoClose(script){
 		if(!this.Close[script])
 			this.Close[script]:=1
-	}
-	Color(con){
+	}Color(con){
 		v.con:=con
 		SetTimer,Color,-1
 		Sleep,10
 		v.con:=""
-	}
-	Focus(){
+	}Focus(){
 		ControlFocus,Scintilla1,% hwnd([1])
 		GuiControl,+Redraw,Scintilla1
 		Gui,1:Default
 		Gui,1:TreeView,SysTreeView321
 		setpos(TV_GetSelection()),csc(1)
-	}
-	update(filename,text){
+	}update(filename,text){
 		update({file:filename,text:text})
-	}
-	Show(){
+	}Show(){
 		sc:=csc()
 		WinActivate,% hwnd([1])
 		GuiControl,+Redraw,% sc.sc
 		setpos(sc.2357),sc.2400
-	}
-	Style(){
+	}Style(){
 		return ea:=settings.ea(settings.ssn("//fonts/font[@style='5']")),ea.color:=RGB(ea.color),ea.Background:=RGB(ea.Background)
-	}
-	TrayTip(info){
+	}TrayTip(info){
 		TrayTip,AHK Studio,%info%,2
-	}
-	csc(obj,hwnd){
+	}csc(obj,hwnd){
 		csc({plugin:obj,hwnd:hwnd})
-	}
-	MoveStudio(){
+	}MoveStudio(){
 		version:=";auto_version"
 		SplitPath,A_ScriptFullPath,,,,name
 		FileMove,%A_ScriptFullPath%,%name%-%version%.ahk,1
-	}
-	version(){
+	}version(){
 		return ";auto_version"
-	}
-	EnableSC(x:=0){
+	}EnableSC(x:=0){
 		sc:=csc()
 		if(x){
 			GuiControl,1:+Redraw,% sc.sc
@@ -68,86 +53,61 @@ Class PluginClass{
 		}else{
 			;GuiControl,1:-Redraw,% sc.sc
 			GuiControl,1:+g,% sc.sc
-		}
-	}
-	Publish(info:=0){
+	}}Publish(info:=0){
 		return,Publish(info)
-	}
-	Hotkey(win:=1,key:="",label:="",on:=1){
+	}Hotkey(win:=1,key:="",label:="",on:=1){
 		if(!(win,key,label))
 			return m("Unable to set hotkey")
 		Hotkey,IfWinActive,% hwnd([win])
 		Hotkey,%key%,%label%,% _:=on?"On":"Off"
-	}
-	save(){
+	}save(){
 		save()
-	}
-	sc(){
+	}sc(){
 		return csc()
-	}
-	hwnd(win:=1){
+	}hwnd(win:=1){
 		return hwnd(win)
-	}
-	get(name){
+	}get(name){
 		return _:=%name%
-	}
-	tv(tv){
+	}tv(tv){
 		return tv(tv)
-	}
-	Current(x:=""){
+	}Current(x:=""){
 		return current(x)
-	}
-	m(info*){
+	}m(info*){
 		m(info*)
-	}
-	allctrl(code,lp,wp){
+	}allctrl(code,lp,wp){
 		for a,b in s.ctrl
 			b[code](lp,wp)
-	}
-	DynaRun(script){
+	}DynaRun(script){
 		return DynaRun(script)
-	}
-	activate(){
+	}activate(){
 		WinActivate,% hwnd([1])
-	}
-	call(info*){
+	}call(info*){
 		;this can cause major errors
 		if(IsFunc(info.1)&&info.1~="i)(Fix_Indent|newindent)"=0){
 			func:=info.1,info.Remove(1)
 			return %func%(info*)
 		}
 		SetTimer,% info.1,-100
-	}
-	Plugin(action,hwnd){
+	}Plugin(action,hwnd){
 		SetTimer,%action%,-10
-	}
-	open(info){
+	}open(info){
 		tv:=open(info),tv(tv)
 		WinActivate,% hwnd([1])
-	}
-	GuiControl(info*){
+	}GuiControl(info*){
 		GuiControl,% info.1,% info.2,% info.3
-	}
-	ssn(node,path){
+	}ssn(node,path){
 		return node.SelectSingleNode(path)
-	}
-	__Call(x*){
+	}__Call(x*){
 		m(x)
-	}
-	__Delete(){
+	}__Delete(){
 		;m("ok")
-	}
-	StudioPath(){
+	}StudioPath(){
 		return A_ScriptFullPath
-	}
-	files(){
+	}files(){
 		return update("get").1
-	}
-	SetText(contents){
+	}SetText(contents){
 		length:=VarSetCapacity(text,strput(contents,"utf-8")),StrPut(contents,&text,length,"utf-8")
 		csc().2181(0,&text)
-	}
-	ReplaceSelected(text){
+	}ReplaceSelected(text){
 		csc().2170(0,&text:=encode(text))
-	}
-}
+}}

@@ -25,7 +25,7 @@ Plugins(refresh:=0){
 			plugin:=menus.Add("menu",{clean:"Plugin",name:"P&lugin"},,1)
 		FileRead,plg,%A_LoopFileFullPath%
 		pos:=1
-		while,pos:=RegExMatch(plg,"Oim)\;menu\s*(.*)\R",found,pos){
+		while,pos:=RegExMatch(plg,"Oim)\;menu\s+(.*)\R",found,pos){
 			item:=StrSplit(found.1,","),item.1:=Trim(item.1,"`r|`r`n|`n")
 			if(!ii:=menus.ssn("//*[@clean='" clean(Trim(item.1)) "']"))
 				menus.under(plugin,"menu",{name:Trim(item.1),clean:clean(item.1),plugin:A_LoopFileFullPath,option:item.2,hotkey:plHks[item.1]})

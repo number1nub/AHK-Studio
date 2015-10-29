@@ -85,7 +85,6 @@ Gui(){
 	Gui,1:Show,%pos% %max% Hide,AHK Studio
 	Margin_Left(1),csc().2400,BraceSetup(1),SetMatch(),Resize("rebar")
 	SetTimer,rsize,-0
-	Sleep,40
 	Gui,Show,%max%
 	RefreshThemes(),debug.off()
 	while,oo:=open.item[A_Index-1]{

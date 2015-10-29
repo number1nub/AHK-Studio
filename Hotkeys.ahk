@@ -1,4 +1,11 @@
-Hotkeys(win,item,On:="On"){
+Hotkeys(win,item,track:=0){
+	static last:=[]
+	if(track)
+		while,off:=last.pop(){
+			Hotkey,IfWinActive,% hwnd([off.win])
+			Hotkey,% off.key,Off
+			v.hotkeyobj.Delete(off.key)
+		}
 	for key,label in item{
 		label:=clean(label)
 		if(IsFunc(label))
@@ -11,7 +18,9 @@ Hotkeys(win,item,On:="On"){
 			if(!hwnd(b))
 				Break
 			Hotkey,IfWinActive,% hwnd([b])
-			Hotkey,%key%,%launch%,%On%
+			Hotkey,%key%,%launch%,On
+			if(track)
+				last.push({win:b,key:key})
 		}launch:=""
 	}
 	Hotkey,IfWinActive

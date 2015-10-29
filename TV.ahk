@@ -8,10 +8,10 @@ tv(tv:=0,open:="",history:=0){
 	tv:
 	if(A_GuiEvent="S"||open||history){
 		SetTimer,matchfile,Off
-		sc.Enable()
 		if(!v.startup)
 			getpos(),count:=0
 		ei:=open?tv:a_eventinfo,sc:=csc(),file:=files.ssn("//*[@tv='" ei "']"),fn:=ssn(file,"@file").text
+		sc.Enable()
 		if(file.nodename!="file")
 			return
 		if(!ssn(file,"@tv").text)

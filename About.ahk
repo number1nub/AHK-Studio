@@ -19,6 +19,8 @@ Help from friends who have given me great ideas and bug reports
 	
 All of the editors that I have used for giving me ideas for this project
 
+Special thanks to number1nub and Run1e for helping with the beta testing for the latest version
+
 License for Scintilla and SciTE
 
 Copyright 1998-2002 by Neil Hodgson <neilh@scintilla.org>

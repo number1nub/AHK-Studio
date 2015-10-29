@@ -11,10 +11,9 @@ Notes(NoActivate:=0){
 	if(note.text){
 		FileAppend,% note.text,Notes\%nne%.txt
 		note.text:=""
-	}
-	main:=main:=files.ssn("//main[@file='" parent "']/descendant::*[@note='1']"),ea:=xml.ea(main)
+	}main:=main:=files.ssn("//main[@file='" parent "']/descendant::*[@note='1']"),ea:=xml.ea(main)
 	if(!main)
-		main:=files.ssn("//file[@file='" parent "']"),mm:=xml.ea(main),files.under(main,"file",{note:1,file:A_ScriptDir "\notes\" nne ".txt",filename:filename,tv:(tv:=TV_Add(nne ".txt",mm.tv))}),text:=FileOpen(A_ScriptDir "\notes\" nne ".txt","r"),update({file:A_ScriptDir "\notes\" nne ".txt",text:RegExReplace(text.Read(text.length),"\R","`n")}),tv(tv,1)
+		main:=files.ssn("//file[@file='" parent "']"),mm:=xml.ea(main),files.under(main,"file",{note:1,file:A_ScriptDir "\notes\" nne ".txt",filename:filename,tv:(tv:=TV_Add(nne ".txt",mm.tv))}),text:=FileOpen(A_ScriptDir "\notes\" nne ".txt","r"),update({file:A_ScriptDir "\notes\" nne ".txt",text:RegExReplace(text.Read(text.length),"\R","`n"),load:1}),tv(tv,1)
 	else if(current(3).file=A_ScriptDir "\notes\" nne ".txt")
 		tv(files.ssn("//file[@file='" lastfile "']/@tv").text)
 	else

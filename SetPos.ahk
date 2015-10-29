@@ -1,4 +1,4 @@
-SetPos(tv){
+SetPos(tv:=""){
 	static
 	delay:=(WinActive("A")=hwnd(1))?1:300
 	if(delay=1)

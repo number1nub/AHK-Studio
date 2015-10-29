@@ -34,7 +34,7 @@ Menu(menuname:="main"){
 			Menu,% b.parent,Delete,% b.name
 		Menu,% b.parent,Add,% b.name,% ":" b.name
 	}
-	hotkeys([1],v.hotkeyobj)
+	hotkeys([1],v.hotkeyobj,1)
 	Gui,1:Menu,%menuname%
 	return menuname
 	MenuRoute:

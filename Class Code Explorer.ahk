@@ -1,5 +1,5 @@
 Class Code_Explorer{
-	static explore:=[],TreeView:=[],sort:=[],function:="OUm`n)^[\s|}]*((\w|[^\x00-\x7F])+)\((.*)\)(\s+;.*)?\n?[\s]*\{",label:="UOm`n)^\s*((\w|[^\x00-\x7F])+):[^\w][\s+;]",class:="Om`ni)^[\s*]?(class\s+(\w|[^\x00-\x7F])+)",Property:="Om`n)^\s*((\w|[^\x00-\x7F])+)\[(.*)?\][\s+;.*\s+]?[\s*]?{",functions:=[],variables:=[],varlist:=[]
+	static explore:=[],TreeView:=[],sort:=[],function:="OUm`n)^[\s|}]*((\w|[^\x00-\x7F])+)\((.*)\)(\s+;.*)?\n?[\s]*\{",label:="UOm`n)^\s*((\w|[^\x00-\x7F])+):[\s|\R][\s+;]?",class:="Om`ni)^[\s*]?(class\s+(\w|[^\x00-\x7F])+)",Property:="Om`n)^\s*((\w|[^\x00-\x7F])+)\[(.*)?\][\s+;.*\s+]?[\s*]?{",functions:=[],variables:=[],varlist:=[]
 	scan(node){
 		static no:=new xml("no")
 		ea:=xml.ea(node),text:="`n" update({get:ea.file}),pos:=1,parent:=ssn(node,"@file").text,next:=cexml.ssn("//file[@file='" parent "']"),fnme:=ea.file
@@ -49,7 +49,7 @@ Class Code_Explorer{
 				*/
 			}
 		}
-		for type,find in {Hotkey:"Om`n)^\s*([#|!|^|\+|~|\$|&|<|>|*]*?\w+)::",Label:this.label}{
+		for type,find in {Hotkey:"Om`n)^\s*([#|!|^|\+|~|\$|&|<|>|*]*\w+([ |\t]*\&[ |\t]*[#|!|^|\+|~|\$|&|<|>|*]*\w+)?)::",Label:this.label}{
 			pos:=1
 			while,RegExMatch(text,find,fun,pos),pos:=fun.pos(1)+fun.len(1)
 				if(!no.ssn("//bad[@min<'" fun.pos(1) "' and @max>'" fun.pos(1) "' and @type!='Class']"))

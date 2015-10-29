@@ -1,13 +1,8 @@
 FileCheck(file){
-	static dates:={commands:{date:20151023111914,loc:"lib\commands.xml",url:"http://files.maestrith.com/AHK-Studio/commands.xml",type:1},menus:{date:20151026004008,loc:"lib\menus.xml",url:"http://files.maestrith.com/AHK-Studio/menus.xml",type:2},scilexer:{date:20150606000000,loc:"SciLexer.dll",url:"http://files.maestrith.com/AHK-Studio/SciLexer.dll",type:1},icon:{date:20150914131604,loc:"AHKStudio.ico",url:"http://files.maestrith.com/AHK-Studio/AHKStudio.ico",type:3},Studio:{date:20151021125614,loc:A_MyDocuments "\Autohotkey\Lib\Studio.ahk",url:"https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Lib/Studio.ahk",type:1}}
+	static dates:={commands:{date:20151023111914,loc:"lib\commands.xml",url:"http://files.maestrith.com/AHK-Studio/commands.xml",type:3},menus:{date:20151026004008,loc:"lib\menus.xml",url:"http://files.maestrith.com/AHK-Studio/menus.xml",type:2},scilexer:{date:20150606000000,loc:"SciLexer.dll",url:"http://files.maestrith.com/AHK-Studio/SciLexer.dll",type:3},icon:{date:20150914131604,loc:"AHKStudio.ico",url:"http://files.maestrith.com/AHK-Studio/AHKStudio.ico",type:3},Studio:{date:20151021125614,loc:A_MyDocuments "\Autohotkey\Lib\Studio.ahk",url:"https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Lib/Studio.ahk",type:3}}
 	if(!FileExist(A_MyDocuments "\Autohotkey")){
 		FileCreateDir,% A_MyDocuments "\Autohotkey"
 		FileCreateDir,% A_MyDocuments "\Autohotkey\Lib"
-	}
-	if(!FileExist("plugins\settings.ahk")){
-		SplashTextOn,300,50,Downloading Settings.ahk,Please Wait...
-		FileCreateDir,Plugins
-		URLDownloadToFile,https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Settings.ahk,plugins\Settings.ahk
 	}
 	if(file){
 		if(file){
@@ -70,11 +65,20 @@ FileCheck(file){
 				SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....
 				UrlDownloadToFile,% b.url,% b.loc
 				FileSetTime,% b.date,% b.loc,M
-			}else if(b.type=3&&FileExist(b.loc)=""){
+			}else if(b.type=3){
+				FileGetTime,time,% b.loc
+				if(time>b.date)
+					Continue
 				SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....
 				UrlDownloadToFile,% b.url,% b.loc
 				FileSetTime,% b.date,% b.loc,M
 			}
+		}
+		if(!FileExist("plugins\settings.ahk")){
+			SplashTextOn,300,50,Downloading Settings.ahk,Please Wait...
+			FileCreateDir,Plugins
+			URLDownloadToFile,https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Settings.ahk,plugins\Settings.ahk
+			Refresh_Plugins()
 		}
 		SplashTextOff
 	}
