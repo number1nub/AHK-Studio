@@ -104,7 +104,9 @@ Class XML{
 			FileDelete,%filename%
 		if(this.xml.SelectSingleNode("*").xml="")
 			return m("Errors happened. Reverting to old version of the XML")
-		file:=fileopen(filename,"rw",encoding),file.seek(0),file.write(this[]),file.length(file.position)
+		ff:=FileOpen(filename,0,encoding),text:=ff.Read(ff.length),ff.Close()
+		if(text!=this[])
+			file:=FileOpen(filename,"rw",encoding),file.seek(0),file.write(this[]),file.length(file.position)
 	}
 	ea(path){
 		list:=[]
