@@ -99,13 +99,13 @@ Class XML{
 	save(x*){
 		if(x.1=1)
 			this.Transform()
-		filename:=this.file?this.file:x.1.1,encoding:=ffff.pos=3?"UTF-8":ffff.pos=2?"UTF-16":"CP0",enc:=RegExMatch(this[],"[^\x00-\x7F]")?"utf-16":"utf-8"
-		if(encoding!=enc)
-			FileDelete,%filename%
+		filename:=this.file?this.file:x.1.1,encoding:=ffff.pos=3?"UTF-8":ffff.pos=2?"UTF-16":"CP0" ;,enc:=RegExMatch(this[],"[^\x00-\x7F]")?"utf-16":"utf-8"
+		;if(encoding!=enc)
+		;	FileDelete,%filename%
 		if(this.xml.SelectSingleNode("*").xml="")
 			return m("Errors happened. Reverting to old version of the XML")
 		ff:=FileOpen(filename,0,encoding),text:=ff.Read(ff.length),ff.Close()
-		if(Trim(text,"`n")!=Trim(this[],"`n"))
+		if(text!=this[])
 			file:=FileOpen(filename,"rw",encoding),file.seek(0),file.write(this[]),file.length(file.position)
 	}
 	ea(path){
