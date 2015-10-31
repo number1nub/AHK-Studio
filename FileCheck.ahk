@@ -31,7 +31,6 @@ FileCheck(file){
 		if(FileExist(locdir)=""&&InStr(locdir,".")!=0)
 			FileCreateDir,%locdir%
 		if(b.type=2){
-			menus:=new xml("menus","lib\menus.xml")
 			if(menus.ssn("//date").text!=b.date){
 				SplashTextOn,300,100,Downloading Menus XML,Please Wait...
 				temp:=new xml("temp"),temp.xml.loadxml(URLDownloadToVar(b.url))

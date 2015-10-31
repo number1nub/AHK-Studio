@@ -17,7 +17,7 @@ Menu(menuname:="main"){
 			if((!IsFunc(ea.clean)&&!IsLabel(ea.clean))&&!FileExist(ea.plugin))
 				Continue
 			exist[parent]:=1
-		}
+		}v.available[ea.clean]:=1
 		(aa.haschildnodes())?(track.push({name:ea.name,parent:parent,clean:ea.clean}),route:="deadend"):(route:="MenuRoute")
 		if(ea.hotkey)
 			v.hotkeyobj[ea.hotkey]:=ea.clean
