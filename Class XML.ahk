@@ -107,6 +107,8 @@ Class XML{
 		ff:=FileOpen(filename,0,encoding),text:=ff.Read(ff.length),ff.Close()
 		if(text!=this[])
 			file:=FileOpen(filename,"rw",encoding),file.seek(0),file.write(this[]),file.length(file.position)
+		else
+			m("hmm")
 	}
 	ea(path){
 		list:=[]
