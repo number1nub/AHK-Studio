@@ -44,7 +44,7 @@ NewIndent(indentwidth:=""){
 			Continue
 		}
 		if(InStr(text,Chr(59)))
-			text:=RegExReplace(text,"\s" Chr(59) ".*"),comment:=1
+			text:=RegExReplace(text,"\s+" Chr(59) ".*"),comment:=1
 		first:=SubStr(text,1,1),last:=SubStr(text,0,1),ss:=(text~="i)^\s*(&&|\bOR\b|\bAND\b|\.|\,|\|\||:|\?)\s*"),indentcheck:=RegExMatch(text,"iA)}*\s*\b(" v.indentregex ")\b",string)
 		if(InStr(string,"try"))
 			if(RegExReplace(text,"i)(\{|try|\s)"))
