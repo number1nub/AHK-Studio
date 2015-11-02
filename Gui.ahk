@@ -77,16 +77,15 @@ Gui(){
 	;/end
 	Gui,Add,StatusBar,hwndstatus
 	ControlGetPos,,,,h,,ahk_id%status%
-	v.status:=h
-	Menu("main"),max:=ssn(pos,"@max").text?"Maximize":"",pos:=pos.text?pos.text:"w750 h500"
+	v.status:=h,Menu("main"),max:=ssn(pos,"@max").text?"Maximize":"",pos:=pos.text?pos.text:"w750 h500"
 	Gui,Show,%pos% Hide,AHK Studio
 	WinSetTitle,% hwnd([1]),,AHK Studio - Indexing Lib Files
 	Index_Lib_Files(),OnMessage(5,"Resize"),open:=settings.sn("//open/file"),options()
 	Gui,1:Show,%pos% %max% Hide,AHK Studio
 	Margin_Left(1),csc().2400,BraceSetup(1),SetMatch(),Resize("rebar")
-	SetTimer,rsize,-0
-	Gui,Show,%max%
 	RefreshThemes(),debug.off()
+	Gui,Show,%max%
+	SetTimer,rsize,-0
 	while,oo:=open.item[A_Index-1]{
 		if(!FileExist(oo.text)){
 			rem:=settings.sn("//file[text()='" oo.text "']")
@@ -108,7 +107,6 @@ Gui(){
 		}
 		csc({hwnd:s.main.1.sc}).2400
 	}
-	SetTimer,scanfiles,-100
 	WinSet,Redraw,,% hwnd([1])
 	OnExit,Exit
 	v.opening:=0

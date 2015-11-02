@@ -39,7 +39,7 @@ Open(filelist="",show="",Redraw:=1){
 			gosub,addfile
 			v.filescan.Insert(b)
 		}
-		SetTimer,scanfiles,-100
+		SetTimer,scanfiles,-1000
 		return files.ssn("//main[@file='" StrSplit(filelist,"`n").1 "']/file/@tv").text,PERefresh()
 		scanfiles:
 		allfiles:=files.sn("//file")
