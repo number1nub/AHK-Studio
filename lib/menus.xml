@@ -230,15 +230,15 @@
 			<menu clean="Online_Help" name="Online Help"></menu>
 			<menu name="&amp;Social" clean="Social"></menu>
 			<menu clean="Testing" name="Testing" hotkey="^K"></menu></menu>
-		<menu clean="Plugin" name="P&amp;lugin" tv="3472552">
+		<menu clean="Plugin" name="P&amp;lugin">
 			<menu clean="Additional_Publish" hotkey="" name="Additional Publish" option="" plugin="plugins\Additional Publish.ahk"></menu>
 			<menu clean="Align_Selected_Text" hotkey="" name="Align Selected Text" option="" plugin="plugins\Align Selected Text.ahk"></menu>
 			<menu clean="Auto_Menu_Adder" hotkey="" name="Auto Menu Adder" option="" plugin="plugins\Auto Menu Adder.ahk"></menu>
 			<menu clean="Backup" hotkey="" name="Backup" option="" plugin="plugins\Backup.ahk"></menu>
 			<menu clean="Camel" hotkey="" name="Camel" option="" plugin="plugins\Camel.ahk"></menu>
 			<menu clean="Capture_Gif" hotkey="" name="Capture Gif" option="" plugin="plugins\Capture Gif.ahk"></menu>
-			<menu clean="Compile_In_Unicode_32" hotkey="" name="Compile In Unicode 32" option="" plugin="plugins\Compile.ahk"></menu>
 			<menu clean="Compile_Using_Unicode_32" hotkey="" name="Compile Using Unicode 32" option="" plugin="plugins\Compile Using Unicode 32.ahk"></menu>
+			<menu clean="Compile_In_Unicode_32" hotkey="" name="Compile In Unicode 32" option="" plugin="plugins\Compile.ahk"></menu>
 			<menu clean="Fix_if" hotkey="" name="Fix &amp;if" option="" plugin="plugins\Fix If.ahk"></menu>
 			<menu clean="Increment_Selected" hotkey="" name="Increment Selected" option="" plugin="plugins\Increment Selected.ahk"></menu>
 			<menu clean="Lookup_Old_Code" hotkey="" name="Lookup Old Code" option="" plugin="plugins\Lookup.ahk"></menu>
@@ -246,8 +246,8 @@
 			<menu clean="Mark_All_Files_For_Update" hotkey="" name="Mark All Files For Update" option="" plugin="plugins\Mark All Files For Update.ahk"></menu>
 			<menu clean="New_Plugin" hotkey="" name="New Plugin" option="" plugin="plugins\New Plugin.ahk"></menu>
 			<menu clean="Options_Dialog" hotkey="" name="Options Dialog" option="" plugin="plugins\Options Dialog.ahk"></menu>
-			<menu clean="Paste_Clipboard" hotkey="" name="Paste Clipboard" option="Clipboard" plugin="plugins\Paste Script.ahk"></menu>
 			<menu clean="Paste_To_p.ahkscript.org" hotkey="" name="Paste To p.ahkscript.org" option="" plugin="plugins\Paste Script.ahk"></menu>
+			<menu clean="Paste_Clipboard" hotkey="" name="Paste Clipboard" option="Clipboard" plugin="plugins\Paste Script.ahk"></menu>
 			<menu clean="Remove_Blank_Lines" hotkey="" name="Remove Blank Lines" option="" plugin="plugins\Remove Blank Lines.ahk"></menu>
 			<menu clean="Run_Current_Segment" hotkey="" name="Run Current Segment" option="segment" plugin="plugins\Run Selected Text.ahk"></menu>
 			<menu clean="Split_Line_By_Comma" hotkey="!," name="Split Line By Comma" option="" plugin="plugins\Split By Comma.ahk"></menu>

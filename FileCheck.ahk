@@ -3,17 +3,16 @@ FileCheck(file){
 	if(!FileExist(A_MyDocuments "\Autohotkey")){
 		FileCreateDir,% A_MyDocuments "\Autohotkey"
 		FileCreateDir,% A_MyDocuments "\Autohotkey\Lib"
-	}
+	}if(FileExist("lib\Studio.ahk"))
+		FileMove,lib\Studio.ahk,%A_MyDocuments%\Autohotkey\Lib\Studio.ahk,1
 	if(file){
 		if(file){
 			if(!settings.ssn("//open/file[text()='" file "']"))
 				settings.add("open/file",{select:1},file,1)
-		}
-		if(x:=ComObjActive("ahk-studio")){
+		}if(x:=ComObjActive("ahk-studio")){
 			x.open(file),x.scanfiles(),x.Show()
 			ExitApp
-		}
-	}if(A_PtrSize=8&&A_IsCompiled=""){
+	}}if(A_PtrSize=8&&A_IsCompiled=""){
 		SplitPath,A_AhkPath,,dir
 		if(!FileExist(correct:=dir "\AutoHotkeyU32.exe")){
 			m("Requires AutoHotkey 1.1 to run")
@@ -22,8 +21,7 @@ FileCheck(file){
 		Run,"%correct%" "%A_ScriptName%",%A_ScriptDir%
 		ExitApp
 		return
-	}
-	ComObjError(0)
+	}ComObjError(0)
 	for a,b in dates{
 		FileGetTime,time,% b.loc,M
 		loc:=b.loc
@@ -60,33 +58,26 @@ FileCheck(file){
 				}menus.add("date",,b.date),menus.save(1),options:=temp.sn("//*[@clean='Options']/*")
 				while,oo:=options.item[A_Index-1],ea:=xml.ea(oo)
 					menus.ssn("//*[@clean='" ea.clean "']").SetAttribute("option",1)
-		}}else if(time!=b.date){
-			if(b.type=1){
-				SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....
-				UrlDownloadToFile,% b.url,% b.loc
-				FileSetTime,% b.date,% b.loc,M
-			}else if(b.type=3){
-				FileGetTime,time,% b.loc
-				if(time>b.date)
-					Continue
-				SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....
-				UrlDownloadToFile,% b.url,% b.loc
-				FileSetTime,% b.date,% b.loc,M
-			}
-		}
-		if(!FileExist("plugins\settings.ahk")){
-			SplashTextOn,300,50,Downloading Settings.ahk,Please Wait...
-			FileCreateDir,Plugins
-			URLDownloadToFile,https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Settings.ahk,plugins\Settings.ahk
-			Refresh_Plugins()
-		}
-		SplashTextOff
+		}}else if(time<=b.date&&(type=1||type=3)){
+			SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....
+			UrlDownloadToFile,% b.url,% b.loc
+			FileSetTime,% b.date,% b.loc,M
+		}else if(!time){
+			SplashTextOn,200,100,% "Downloading " b.loc,Please Wait....
+			UrlDownloadToFile,% b.url,% b.loc
+			FileSetTime,% b.date,% b.loc,M
+	}}
+	if(!FileExist("plugins\settings.ahk")){
+		SplashTextOn,300,50,Downloading Settings.ahk,Please Wait...
+		FileCreateDir,Plugins
+		URLDownloadToFile,https://raw.githubusercontent.com/maestrith/AHK-Studio-Plugins/master/Settings.ahk,plugins\Settings.ahk
+		Refresh_Plugins()
 	}
+	SplashTextOff
 	if(!settings.ssn("//fonts"))
 		DefaultFont()
 	RegRead,value,HKCU,Software\Classes\AHK-Studio
-	if(!value)
-		RegisterID("{DBD5A90A-A85C-11E4-B0C7-43449580656B}","AHK-Studio")
+	(!value)?RegisterID("{DBD5A90A-A85C-11E4-B0C7-43449580656B}","AHK-Studio"):""
 	if(!settings.ssn("//autoadd")){
 		top:=settings.add("autoadd")
 		for a,b in {"{":"}","[":"]","<":">","'":"'","(":")",Chr(34):Chr(34)}

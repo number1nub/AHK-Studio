@@ -20,7 +20,7 @@ PublishIndent(Code,Indent:="`t",Newline:="`r`n"){
 	indentregex:=v.indentregex,Lock:=[],Block:=[],ParentIndent:=Braces:=0,ParentIndentObj:=[]
 	for each,Line in StrSplit(Code,"`n","`r"){
 		Text:=Trim(RegExReplace(Line,"\s;.*")),First:=SubStr(Text,1,1),Last:=SubStr(Text,0,1),FirstTwo:=SubStr(Text,1,2),IsExpCont:=(Text~="i)^\s*(&&|OR|AND|\.|\,|\|\||:|\?)"),IndentCheck:=(Text~="iA)}?\s*\b(" IndentRegEx ")\b")
-		if(First=="("&&Last!=")")
+		if(First=="("&&!InStr(line,")"))
 			Skip:=True
 		if(Skip){
 			if(First==")")
@@ -42,8 +42,7 @@ PublishIndent(Code,Indent:="`t",Newline:="`r`n"){
 				if(Cur&&Current.MaxIndex()<=1)
 					break
 				Special:=Current.Pop().Ind,Braces--
-		}}
-		if(First=="{"&&ParentIndent)
+		}}if(First=="{"&&ParentIndent)
 			ParentIndent--
 		Out.=Newline
 		Loop,% Special?Special-1:Round(Current[Current.MaxIndex()].Ind)+Round(ParentIndent)
@@ -53,8 +52,7 @@ PublishIndent(Code,Indent:="`t",Newline:="`r`n"){
 			if(!Block.MinIndex())
 				Block.Push({ParentIndent:ParentIndent,Ind:Round(Lock[Lock.MaxIndex()].Ind)+1,Braces:Round(Lock[Lock.MaxIndex()].Braces)+1})
 			Current:=Block,ParentIndent:=0
-		}
-		if(Last=="{")
+		}if(Last=="{")
 			Braces++,ParentIndent:=(IsExpCont&&Last=="{")?ParentIndent-1:ParentIndent,Current.Push({Braces:Braces,Ind:ParentIndent+Round(Current[Current.MaxIndex()].ParentIndent)+Braces,ParentIndent:ParentIndent+Round(Current[Current.MaxIndex()].ParentIndent)}),ParentIndent:=0
 		if((ParentIndent||IsExpCont||IndentCheck)&&(IndentCheck&&Last!="{"))
 			ParentIndent++
@@ -63,6 +61,6 @@ PublishIndent(Code,Indent:="`t",Newline:="`r`n"){
 		ParentIndentObj[Cur]:=ParentIndent,Special:=0
 	}
 	if(Braces)
-		throw Exception("Segment Open!")
+		throw Exception("Segment Open! You have " braces " open braces")
 	return SubStr(Out,StrLen(Newline)+1)
 }
