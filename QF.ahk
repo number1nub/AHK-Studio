@@ -95,7 +95,7 @@ QF(){
 	if(Focus="Edit1")
 		goto,qf
 	else if(A_ThisHotkey="+Enter"||A_ThisHotkey="enter")
-		replace()
+		replace(),MarginWidth()
 	else
 		marginwidth()
 	if(v.options.full_auto)
