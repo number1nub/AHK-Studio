@@ -6,7 +6,7 @@ Class GuiKeep{
 		for a,b in {border:border,caption:DllCall("GetSystemMetrics",int,4)}
 			this[a]:=b
 		if(settings.ssn("//options/@Add_Margins_To_Windows").text!=1)
-			Gui,Margin,0,0
+			Gui,% this.win ":Margin",0,0
 		if(info.1)
 			this.add(info*)
 	}
