@@ -1,5 +1,5 @@
 FileCheck(file){
-	static dates:={commands:{date:20151023111914,loc:"lib\commands.xml",url:"lib/commands.xml",type:3},menus:{date:20151031121205,loc:"lib\menus.xml",url:"lib/menus.xml",type:2},scilexer:{date:20150606000000,loc:"SciLexer.dll",url:"SciLexer.dll",type:3},icon:{date:20150914131604,loc:"AHKStudio.ico",url:"AHKStudio.ico",type:3},Studio:{date:20151021125614,loc:A_MyDocuments "\Autohotkey\Lib\Studio.ahk",url:"lib/Studio.ahk",type:3}}
+	static dates:={commands:{date:20151023111914,loc:"lib\commands.xml",url:"lib/commands.xml",type:3},menus:{date:20151106173300,loc:"lib\menus.xml",url:"lib/menus.xml",type:2},scilexer:{date:20150606000000,loc:"SciLexer.dll",url:"SciLexer.dll",type:3},icon:{date:20150914131604,loc:"AHKStudio.ico",url:"AHKStudio.ico",type:3},Studio:{date:20151021125614,loc:A_MyDocuments "\Autohotkey\Lib\Studio.ahk",url:"lib/Studio.ahk",type:3}}
 	url:="https://raw.githubusercontent.com/maestrith/AHK-Studio/master/"
 	if(!FileExist(A_MyDocuments "\Autohotkey")){
 		FileCreateDir,% A_MyDocuments "\Autohotkey"

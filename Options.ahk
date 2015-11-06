@@ -106,6 +106,7 @@ Options(x:=0){
 	Full_Backup_All_Files:
 	Add_Margins_To_Windows:
 	Disable_Auto_Complete_In_Quotes:
+	Virtual_Scratch_Pad:
 	onoff:=settings.ssn("//options/@ " A_ThisLabel).text?0:1
 	att:=[],att[A_ThisLabel]:=onoff,v.options[A_ThisLabel]:=onoff
 	settings.add("options",att)

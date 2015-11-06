@@ -10,6 +10,8 @@ save(option=""){
 		}
 	}savedfiles:=[]
 	for filename in info.2{
+		if(v.options.Virtual_Scratch_Pad&&filename="Virtual Scratch Pad.ahk")
+			Continue
 		text:=info.1[filename],main:=ssn(current(1),"@file").text,savedfiles.push(1)
 		if(settings.ssn("//options/@Enable_Close_On_Save").text)
 			for process in ComObjGet("winmgmts:").ExecQuery("Select * from Win32_Process"){

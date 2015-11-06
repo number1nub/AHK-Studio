@@ -1,4 +1,8 @@
 Run(){
+	if(v.options.Virtual_Scratch_Pad&&InStr(current(2).file,"Scratch Pad.ahk")){
+		DynaRun(csc().getuni())
+		return
+	}
 	if(!current(1).xml)
 		return
 	sc:=csc(),getpos(),save(),file:=ssn(current(1),"@file").text

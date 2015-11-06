@@ -1,4 +1,4 @@
-about(){
+About(){
 	about=
 (
 If you wish to use this software, great.

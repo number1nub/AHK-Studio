@@ -119,8 +119,10 @@ Notify(csc:=""){
 		}}}
 		if((fn.modtype&0x01)||(fn.modtype&0x02))
 			update({sc:sc.2357})
-		if(fn.modtype&0x02)
-			update({sc:sc.2357})
+		/*
+			if(fn.modtype&0x02)
+				update({sc:sc.2357})
+		*/
 		if(fn.linesadded)
 			MarginWidth(sc)
 		return
@@ -142,7 +144,7 @@ Notify(csc:=""){
 		else if(fn.listtype=4)
 			text:=StrGet(fn.text,"utf-8"),start:=sc.2266(sc.2008,1),end:=sc.2267(sc.2008,1),sc.2645(start,end-start),sc.2003(sc.2008,text "."),sc.2025(sc.2008+StrLen(text ".")),Show_Class_Methods(text)
 		else if(fn.listtype=5){
-			text:=StrGet(fn.text,"utf-8"),start:=sc.2266(sc.2008,1),end:=sc.2267(sc.2008,1),sc.2645(start,end-start),sc.2003(sc.2008,text "()"),sc.2025(sc.2008+StrLen(text "."))
+			text:=StrGet(fn.text,"utf-8"),start:=sc.2266(sc.2008,1),end:=sc.2267(sc.2008,1),add:=sc.2007(end)=40?"":"()",sc.2645(start,end-start),sc.2003(sc.2008,text add),sc.2025(sc.2008+StrLen(text "."))
 			SetTimer,context,-10
 		}
 	}
