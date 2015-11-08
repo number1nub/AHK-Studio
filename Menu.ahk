@@ -14,8 +14,11 @@ Menu(menuname:="main"){
 				Menu,%parent%,Add
 				Continue
 			}
-			if((!IsFunc(ea.clean)&&!IsLabel(ea.clean))&&!FileExist(ea.plugin))
+			if((!IsFunc(ea.clean)&&!IsLabel(ea.clean))&&!FileExist(ea.plugin)){
+				aa.SetAttribute("no",1)
 				Continue
+			}if(ea.no)
+				aa.RemoveAttribute("no")
 			exist[parent]:=1
 		}v.available[ea.clean]:=1
 		(aa.haschildnodes())?(track.push({name:ea.name,parent:parent,clean:ea.clean}),route:="deadend"):(route:="MenuRoute")
