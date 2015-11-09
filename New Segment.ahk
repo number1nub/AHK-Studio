@@ -18,7 +18,7 @@ New_Segment(new:="",text:="",adjusted:=""){
 	Relative:=RegExReplace(relativepath(cur,new),"i)^lib\\([^\\]+)\.ahk$","<$1>"),func:=clean(func)
 	SplitPath,newdir,last
 	sc.2003(sc.2006,["`n#Include " Relative])
-	FileAppend,% m("Create Function Named " function "?","btn:yn")="yes"?function "(){`r`n`r`n}":"",%new%,UTF-8
+	FileAppend,% m("Create Function Named " clean(function) "?","btn:yn")="yes"?clean(function) "(){`r`n`r`n}":"",%new%,UTF-8
 	Refresh_Current_Project(new)
 	Sleep,300
 	sc.2025(StrLen(function)+1),NewIndent()

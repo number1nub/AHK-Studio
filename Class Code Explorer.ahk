@@ -16,30 +16,29 @@ Class Code_Explorer{
 		while,cc:=clist.item[A_Index-1],ea:=xml.ea(cc){
 			tt:=SubStr(text,ea.pos+1),total:="",braces:=0,start:=0
 			for a,b in StrSplit(tt,"`n"){
-				line:=Trim(RegExReplace(b,"(\s+" Chr(59) ".*)")),total.=b "`n"
-				if(SubStr(line,0,1)="{")
-					braces++,start:=1
+				line:=Trim(RegExReplace(b,"(\s+" Chr(59) ".*)"))
 				if(SubStr(line,1,1)="}"){
 					while,((found1:=SubStr(line,A_Index,1))~="(}|\s)"){
 						if(found1~="\s")
 							Continue
 						braces--
 					}
-				}if(start&&braces=0)
+				}
+				if(start&&braces=0)
 					break
-			}
-			total:=Trim(total,"`n"),cc.SetAttribute("end",np:=ea.pos+StrPut(total,"utf-8")-1)
+				total.=b "`n"
+				if(SubStr(line,0,1)="{")
+					braces++,start:=1
+			}lasteapos:=ea.pos,total:=Trim(total,"`n"),cc.SetAttribute("end",np:=ea.pos+StrPut(total,"utf-8")-1)
 			for a,b in {Property:Code_Explorer.property,Method:Code_Explorer.function}{
 				pos:=1
 				while,RegExMatch(total,b,found,pos),pos:=found.Pos(1)+found.len(1)
 					if(no.ssn("//bad[@min<'" ea.pos+found.pos(1) "' and @max>'" ea.pos+found.pos(1) "']")=""&&found.1!="if")
 						add:=a="property"?"[":"(",cexml.under(cc,"info",{type:a,pos:ea.pos+StrPut(SubStr(text,1,found.Pos(1)),"utf-8")-2,text:found.1,upper:upper(found.1),args:found.value(3),class:ea.text})
-			}
-			no.Add("bad/bad",{min:ea.pos,max:np,type:"Class"},,1)
-		}
-		pos:=1
+			}no.Add("bad/bad",{min:ea.pos,max:np,type:"Class"},,1)
+		}pos:=1
 		while,RegExMatch(text,Code_Explorer.Function,found,pos),pos:=found.pos(1)+found.len(1){
-			if(no.ssn("//bad[@min<'" found.pos(1) "' and @max>'" found.pos(1) "']")=""&&found.1!="if"){
+			if(no.ssn("//bad[@min<'" found.pos(1) "' and @max>'" found.pos(1)+1 "']")=""&&found.1!="if"){
 				cexml.under(next,"info",{args:found.3,type:"Function",text:found.1,upper:upper(found.1),pos:StrPut(SubStr(text,1,found.pos(1)))-3})
 				/*
 					if(RegExMatch(tq:=SubStr(text,found.Pos(0)+found.len(0)),"OU)^\s*(\;.*)\n",fq)){
@@ -48,8 +47,7 @@ Class Code_Explorer{
 					}
 				*/
 			}
-		}
-		for type,find in {Hotkey:"Om`n)^\s*([#|!|^|\+|~|\$|&|<|>|*]*\w+([ |\t]*\&[ |\t]*[#|!|^|\+|~|\$|&|<|>|*]*\w+)?)::",Label:this.label}{
+		}for type,find in {Hotkey:"Om`n)^\s*([#|!|^|\+|~|\$|&|<|>|*]*\w+([ |\t]*\&[ |\t]*[#|!|^|\+|~|\$|&|<|>|*]*\w+)?)::",Label:this.label}{
 			pos:=1
 			while,RegExMatch(text,find,fun,pos),pos:=fun.pos(1)+fun.len(1)
 				if(!no.ssn("//bad[@min<'" fun.pos(1) "' and @max>'" fun.pos(1) "' and @type!='Class']"))
@@ -66,22 +64,18 @@ Class Code_Explorer{
 		}pos:=1
 		while,pos:=RegExMatch(text,"OU);#\[(.*)\]",found,pos),pos:=found.Pos(1)+found.len(1)
 			cexml.under(next,"info",{type:"Bookmark",upper:upper(found.1),pos:StrPut(SubStr(text,1,found.Pos(0)),"utf-8"),text:found.1})
-	}
-	remove(filename){
+	}remove(filename){
 		this.explore.remove(ssn(filename,"@file").text),list:=sn(filename,"@file")
 		while,ll:=list.item[A_Index-1]
 			this.explore.Remove(ll.text)
-	}
-	populate(){
+	}populate(){
 		code_explorer.Refresh_Code_Explorer()
 		Gui,1:TreeView,SysTreeView321
-	}
-	Add(value,parent=0,options=""){
+	}Add(value,parent=0,options=""){
 		Gui,1:Default
 		Gui,1:TreeView,SysTreeView322
 		return this.Add(value,parent,options)
-	}
-	Refresh_Code_Explorer(){
+	}Refresh_Code_Explorer(){
 		if(v.options.Hide_Code_Explorer)
 			return
 		Gui,1:Default
@@ -114,8 +108,7 @@ Class Code_Explorer{
 		GuiControl,1:+Redraw,SysTreeView322
 		Gui,1:TreeView,SysTreeView321
 		return
-	}
-	cej(){
+	}cej(){
 		static last
 		cej:
 		if((A_GuiEvent="S"||A_EventInfo=last)&&A_GuiEvent!="RightClick"){
@@ -138,5 +131,4 @@ Class Code_Explorer{
 			return
 		}
 		return
-	}
-}
+}}

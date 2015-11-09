@@ -27,7 +27,7 @@ Omni_Search(start=""){
 	omnisearch:
 	Gui,20:Default
 	GuiControl,20:-Redraw,SysListView321
-	osearch:=search:=newwin[].search,Select:=[],LV_Delete(),sort:=[],stext:=[]
+	osearch:=search:=newwin[].search,Select:=[],LV_Delete(),sort:=[],stext:=[],fsearch:=search="^"?1:0
 	for a,b in StrSplit("@^({[&+#%<")
 		osearch:=RegExReplace(osearch,"\Q" b "\E")
 	if(InStr(search,"?")){
@@ -68,24 +68,29 @@ Omni_Search(start=""){
 		}
 		order:=ll.nodename="file"?"name,type,folder":b.type="menu"?"text,type,additional1":"text,type,file,args",info:=StrSplit(order,","),text:=b[info.1],rating:=0,b.parent:=ssn(ll,"ancestor-or-self::main/@file").text
 		if(!b.file)
-			b.file:=ssn(ll,"ancestor-or-self::file/@file").text
-		if(search="")
+			if(!b.file:=ssn(ll,"ancestor-or-self::file/@file").text)
+				b.file:=ssn(ll,"ancestor-or-self::main/@file").text
+		if(fsearch){
 			if(b.file=ssn(ll,"ancestor::main/@file").text)
 				rating+=50
-		for c,d in searchobj{
-			RegExReplace(text,"i)" d,"",count)
-			if(stext[d]>count)
-				Continue 2
-			pos:=InStr(text,d),rating+=2/pos+A_Index
-			if(text~="i)\b" d)
+			if(currentparent=b.file)
 				rating+=100
+		}else{
+			if(search){
+				for c,d in stext{
+					RegExReplace(text,"i)" c,"",count)
+					if(Count<d)
+						Continue,2
+				}spos:=1
+				for c,d in searchobj
+					if(pos:=RegExMatch(text,"iO)(\b" d ")",found,spos),spos:=found.Pos(1)+found.len(1))
+						rating+=100/pos
+				if(pos:=InStr(text,osearch))
+					rating+=400/pos
+				if(currentparent=ssn(ll,"ancestor::main/@file").text)
+					rating+=100
+			}
 		}
-		if(pos:=InStr(text,osearch))
-			rating+=400/pos
-		if(currentparent=b.parent)
-			rating+=100
-		if(pos:=InStr(text,search))
-			rating+=100/pos
 		two:=info.2="type"&&v.options.Show_Type_Prefix?omni_search_class.iprefix[b[info.2]] "  " b[info.2]:b[info.2]
 		item:=LV_Add("",b[info.1],two,b[info.3],b[info.4],rating,LV_GetCount()+1)
 		Select[item]:=b
