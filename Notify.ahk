@@ -1,8 +1,8 @@
 Notify(csc:=""){
+	notify:
 	static last,lastline,lastpos:=[],focus:=[],dwellfold:="",spam
 	if(csc=0)
 		return lastpos:=[]
-	notify:
 	fn:=[],info:=A_EventInfo,code:=NumGet(info+(A_PtrSize*2))
 	if(NumGet(info+0)=v.debug.sc&&v.debug.sc)
 		return
@@ -29,11 +29,17 @@ Notify(csc:=""){
 		return
 	}if(!s.ctrl[NumGet(info+0)])
 		return csc(1)
-	if code not in 2001,2002,2004,2006,2007,2008,2010,2014,2018,2019,2021,2022,2027
+	if code not in 2001,2005,2002,2004,2006,2007,2008,2010,2014,2018,2019,2021,2022,2027
 		return 0
 	;0:"Obj",2:"Code",4:"ch",6:"modType",7:"text",8:"length",9:"linesadded",10:"msg",11:"wparam",12:"lparam",13:"line",14:"fold",17:"listType",22:"updated"
 	for a,b in {0:"Obj",2:"Code",3:"position",4:"ch",5:"mod",6:"modType",7:"text",8:"length",9:"linesadded",10:"msg",11:"wparam",12:"lparam",13:"line",14:"fold",17:"listType",22:"updated"}
 		fn[b]:=NumGet(Info+(A_PtrSize*a))
+	/*
+		if(fn.ch=32){
+		;this is also where you would check for new words
+			t(word)
+		}
+	*/
 	if(fn.code=2010){
 		margin:=NumGet(Info+(A_PtrSize*16)),line:=sc.2166(fn.position)
 		if(margin=3)
@@ -51,11 +57,12 @@ Notify(csc:=""){
 				*/
 			}
 		}
+		;testing()::""
 	}if(fn.code=2022){
 		if v.options.Autocomplete_Enter_Newline
 			SetTimer,sendenter,100
 		Else{
-			v.word:=StrGet(fn.text,"utf-8")
+			v.word:=StrGet(fn.text,"utf-8") ;this is also where you would check for new words
 			if(v.word="#Include"&&v.options.Disable_Include_Dialog!=1)
 				SetTimer,getinclude,-200
 			else if(v.word~="i)(goto|gosub)")
@@ -93,7 +100,7 @@ Notify(csc:=""){
 		if(fn.ch=10&&v.options.full_auto!=1){
 			SetTimer,fix_next,-50
 			return
-		}cpos:=sc.2008,start:=sc.2266(cpos,1),end:=sc.2267(cpos,1),word:=sc.getword()
+		}cpos:=sc.2008,start:=sc.2266(cpos,1),end:=sc.2267(cpos,1),word:=sc.textrange(start,sc.2008)
 		if((StrLen(word)>1&&sc.2102=0&&v.options.Disable_Auto_Complete!=1)){
 			if((!sc.2202&&v.options.Disable_Auto_Complete_While_Tips_Are_Visible=1)||(sc.2010(cpos)~="\b(13|1|11|3)\b"=1&&v.options.Disable_Auto_Complete_In_Quotes=1)){
 			}else{

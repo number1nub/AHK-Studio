@@ -6,15 +6,24 @@ Context(return=""){
 	if(cp<=start)
 		return
 	string:=sc.textrange(start,cp),pos:=1,fixcp:=cp,sub:=cp-start
-	while,(fixcp>start){
-		if(sc.2010(fixcp)="3")
-			string:=RegExReplace(string,".","_",,1,sub-A_Index+2)
-		fixcp--
-	}co:=InStr(string,"(",,0),cc:=InStr(string,")",,0),open:=cc>co?cc+start:co+start
+	/*
+		while,(fixcp>start){
+			if(sc.2010(fixcp)="3")
+				string:=RegExReplace(string,".","_",,1,sub-A_Index+2)
+			fixcp--
+		}co:=InStr(string,"(",,0),cc:=InStr(string,")",,0) ;,open:=cc>co?cc+start:co+start
+	*/
+	open:=sc.2008,commas:=0
 	Loop{
-		sc.2190(open),sc.2192(start),close:=sc.2197(1,")"),sc.2190(open),sc.2192(start),open:=sc.2197(1,"(")
+		sc.2190(open),sc.2192(start),close:=sc.2197(1,")"),sc.2190(open),sc.2192(start),comma:=sc.2197(1,","),sc.2190(open),sc.2192(start),open:=sc.2197(1,"(")
+		if(comma>close&&comma>open){
+			if(sc.2010(comma)~="\b97|4\b")
+				commas++
+			open:=comma
+			Continue
+		}
 		if(close>open&&open>start){
-			bm:=sc.2353(close),wb:=sc.2266(bm,1),string:=SubStr(string,1,wb-start) SubStr(string,close+2-start),open:=bm
+			bm:=sc.2353(close),wb:=sc.2266(bm,1),string:=SubStr(string,1,wb-start) SubStr(string,close+2-start),open:=sc.2266(bm,1)
 			Continue
 		}
 		if(open<0)
@@ -25,18 +34,19 @@ Context(return=""){
 				pre:=sc.textrange(wordstartpos:=sc.2266(wb-1,1),sc.2267(wb-1,1))
 			if(inst:=cexml.ssn("//main[@file='" current(2).file "']/descendant::*[@type='Instance' and @upper='" upper(pre) "']")){
 				if(args:=cexml.ssn("//main[@file='" current(2).file "']/descendant::*[@type='Class' and @upper='" upper(xml.ea(inst).class) "']/descendant-or-self::*[@upper='" upper(word) "']/@args").text)
-					synmatch.push(pre "." word "(" args ")"),startpos:=startpos=0?wordstartpos:startpos
+					synmatch.push(pre "." word "(" args ")"),startpos:=startpos=0?wordstartpos:startpos,commas++
 			}if(fun:=cexml.ssn("//lib/descendant::info[@upper='" upper(word) "']")){
-				synmatch.push(word "(" xml.ea(fun).args ")"),startpos:=startpos=0?wordstartpos:startpos
+				synmatch.push(word "(" xml.ea(fun).args ")"),startpos:=startpos=0?wordstartpos:startpos,commas++
 			}if(fun:=ssn(cexml.ssn("//main[@file='" current(2).file "']/descendant::*[@type='Function'][@upper='" upper(word) "']"),"@args").text){
-				synmatch.push(word "("  fun  ")"),startpos:=startpos=0?wordstartpos:startpos
+				synmatch.push(word "("  fun  ")"),startpos:=startpos=0?wordstartpos:startpos,commas++
 			}if((ea:=scintilla.ea("//scintilla/commands/item[@code='" word "']")).syntax)
-				synmatch.push(pre "." word ea.syntax "`n" ea.name),startpos:=startpos=0?wordstartpos:startpos
+				synmatch.push(pre "." word ea.syntax "`n" ea.name),startpos:=startpos=0?wordstartpos:startpos,commas++
 			if(syn:=commands.ssn("//Commands/Commands/commands[text()='" v.kw[word] "']/@syntax").text)
-				synmatch.push(word syn),startpos:=startpos=0?wordstartpos:startpos
+				synmatch.push(word syn),startpos:=startpos=0?wordstartpos:startpos,commas+=SubStr(syn,1,1)="("?1:0
 			if(startpos)
 				break
-	}}if(word=""||word="if"){
+		}
+	}if(word=""||word="if"){
 		RegExMatch(string,"O)^\s*\W*(\w+)",word),word:=v.kw[word.1]?v.kw[word.1]:word.1,startpos:=start,loopword:=word,loopstring:=string,build:=word
 		if((list:=v.context[word])&&word!="if"){
 			for a,b in StrSplit(string,","){
@@ -69,20 +79,22 @@ Context(return=""){
 		return word
 	if(!syntax)
 		return
-	synbak:=RegExReplace(syntax,"(\n.*)"),RegExReplace(RegExReplace(synbak,"\(",",",,1),",","",count),syntax:=RegExReplace(syntax,Chr(96) "n","`n"),RegExReplace(RegExReplace(string,"\(",",","",1),",",,current)
+	synbak:=RegExReplace(syntax,"(\n.*)")
+	RegExReplace(synbak:=RegExReplace(synbak,  "\(",",",,1),",","",count)
+	syntax:=RegExReplace(syntax ,Chr(96) "n","`n")
 	if(count=0||word="if")
 		sc.2207(0xAAAAAA),sc.2200(startpos,syntax)
 	else{
 		ff:=RegExReplace(synbak,"\(",","),sc.2207(0xff0000),sc.2200(startpos,syntax)
-		if(current+1<=count)
-			sc.2204(InStr(ff,",",0,1,current),InStr(ff,",",0,1,current+1)-1)
-		if(current>count){
+		if(commas+1<=count)
+			sc.2204(InStr(ff,",",0,1,commas),InStr(ff,",",0,1,commas+1)-1)
+		if(commas>count){
 			if(InStr(SubStr(synbak,InStr(ff,",",0,1,count)+1),"*"))
-				current:=1
+				commas:=1
 			else
 				sc.2204(0,StrLen(ff)),sc.2207(0x0000ff)
-		}if(current=count)
-			end:=RegExMatch(syntax,"(\n|\]|\))"),end:=end?end-1:strlen(ff),sc.2204(InStr(ff,",",0,1,current),end)
+		}if(commas=count)
+			end:=RegExMatch(syntax,"(\n|\]|\))"),end:=end?end-1:strlen(ff),sc.2204(InStr(ff,",",0,1,commas),end)
 	}
 	return
 }
