@@ -210,3 +210,4 @@ return
 #Include Scintilla Code Lookup.ahk
 #Include Scintilla.ahk
 ;/plugin
+#Include Check For Updates.ahk

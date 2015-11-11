@@ -5,17 +5,13 @@ Context(return=""){
 		return
 	if(cp<=start)
 		return
-	string:=sc.textrange(start,cp),pos:=1,fixcp:=cp,sub:=cp-start
-	/*
-		while,(fixcp>start){
-			if(sc.2010(fixcp)="3")
-				string:=RegExReplace(string,".","_",,1,sub-A_Index+2)
-			fixcp--
-		}co:=InStr(string,"(",,0),cc:=InStr(string,")",,0) ;,open:=cc>co?cc+start:co+start
-	*/
-	open:=sc.2008,commas:=0
+	found:=[]
+	string:=sc.textrange(start,cp),pos:=1,sub:=cp-start,open:=sc.2008,commas:=0
 	Loop{
 		sc.2190(open),sc.2192(start),close:=sc.2197(1,")"),sc.2190(open),sc.2192(start),comma:=sc.2197(1,","),sc.2190(open),sc.2192(start),open:=sc.2197(1,"(")
+		for a,b in {open:open,close:close,comma:comma}
+			if(sc.2010(b)=3)
+				%a%:=0
 		if(comma>close&&comma>open){
 			if(sc.2010(comma)~="\b97|4\b")
 				commas++
@@ -26,7 +22,7 @@ Context(return=""){
 			bm:=sc.2353(close),wb:=sc.2266(bm,1),string:=SubStr(string,1,wb-start) SubStr(string,close+2-start),open:=sc.2266(bm,1)
 			Continue
 		}
-		if(open<0)
+		if(open<start)
 			break
 		word:=sc.textrange(wb:=sc.2266(open,1),sc.2267(open,1)),wordstartpos:=wb
 		if(word){
