@@ -105,6 +105,8 @@ Class XML{
 		if(this.xml.SelectSingleNode("*").xml="")
 			return m("Errors happened. Reverting to old version of the XML")
 		ff:=FileOpen(filename,0,encoding),text:=ff.Read(ff.length),ff.Close()
+		if(!this[])
+			return m("Error saving the " this.file " xml.  Please get in touch with maestrith if this happens often")
 		if(text!=this[])
 			file:=FileOpen(filename,"rw",encoding),file.seek(0),file.write(this[]),file.length(file.position)
 	}

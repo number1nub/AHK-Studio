@@ -11,6 +11,8 @@ Publish(return=""){
 		publish:=RegExReplace(publish,Chr(59) "auto_version",newver)
 	publish:=RegExReplace(publish,"U)^\s*(;{.*\R|;}.*\R)","`n")
 	StringReplace,publish,publish,`n,`r`n,All
+	if(!publish)
+		return sc.getuni()
 	if(return)
 		return publish
 	Clipboard:=v.options.Full_Auto?PublishIndent(publish):publish

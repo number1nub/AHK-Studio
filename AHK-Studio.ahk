@@ -42,7 +42,6 @@ return
 #Include Class Rebar.ahk
 #Include Class Scintilla.ahk
 #Include Class Toolbar.ahk
-#Include Class XML.ahk
 #Include Clean.ahk
 #Include Clear Line Status.ahk
 #Include Brace.ahk
@@ -51,6 +50,7 @@ return
 #Include CenterSel.ahk
 #Include Check For Edited.ahk
 #Include Class Code Explorer.ahk
+#Include Class XML.ahk
 #Include Close.ahk
 #Include Color.ahk
 #Include Command Help.ahk
