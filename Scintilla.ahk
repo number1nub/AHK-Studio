@@ -1,8 +1,8 @@
 Scintilla(return:=""){
 	static list
-	filedate:=20150925131313
+	filedate:=20151111121313
 	FileGetTime,time,lib\scintilla.xml
-	if(time!=filedate)
+	if(time<=filedate)
 		FileDelete,lib\scintilla.xml
 	if(!FileExist("lib\scintilla.xml")){
 		SplashTextOn,300,100,Downloading definitions,Please wait
