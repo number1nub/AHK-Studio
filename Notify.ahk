@@ -8,24 +8,33 @@ Notify(csc:=""){
 		return
 	if(info=256||info=512||info=768)
 		return
-	if(code=2029||(code=2007&&WinActive(hwnd([1]))=0)||csc="setpos"){
-		getpos(),focus:=sc:=csc(),obj:=lastpos[current(3).sc]:=[]
-		if(!WinActive(hwnd([1])))
-			Loop,% sc.2570
-				caret:=sc.2577(A_Index-1),anchor:=sc.2579(A_Index-1),(A_Index=1)?obj.push({2008:caret,2009:anchor,2152:sc.2152,main:caret=sc.2577(sc.2575)}):obj.push({2008:caret,2009:anchor,main:caret:=sc.2577(A_Index-1)})
-		return
-	}if(code=2028){
-		Sleep,20
-		sc:=focus.sc?focus:csc(1),maincaret:=1
-		for a,b in lastpos[current(3).sc]
-			maincaret:=b.main?A_Index:maincaret,(A_Index=1)?(sc.2160(b.2008,b.2009)):sc.2573(b.2008,b.2009)
-		sc.2574(maincaret-1)
-		if(fl:=lastpos[current(3).sc].1.2152)
-			sc.2613(fl)
-		SetTimer,Enable,-10
-		SetTimer,LButton,-200
+	sc:=csc()
+	/*
+		if(code=2029||(code=2007&&WinActive(hwnd([1]))=0)||csc="setpos"){
+			getpos(),focus:=sc:=csc(),obj:=lastpos[current(3).sc]:=[]
+			last:=sc.sc
+			if(!WinActive(hwnd([1])))
+				Loop,% sc.2570
+					caret:=sc.2577(A_Index-1),anchor:=sc.2579(A_Index-1),(A_Index=1)?obj.push({2008:caret,2009:anchor,2152:sc.2152,main:caret=sc.2577(sc.2575)}):obj.push({2008:caret,2009:anchor,main:caret:=sc.2577(A_Index-1)})
+			return
+		}
+	*/
+	if(code=2028){
 		if(v.options.Check_For_Edited_Files_On_Focus=1)
 			check_for_edited()
+		/* 
+			Sleep,20
+			sc:=focus.sc?focus:csc(1),maincaret:=1
+			return
+			focus:
+			for a,b in lastpos[current(3).sc]
+				maincaret:=b.main?A_Index:maincaret,(A_Index=1)?(sc.2160(b.2008,b.2009)):sc.2573(b.2008,b.2009)
+			sc.2574(maincaret-1)
+			if(fl:=lastpos[current(3).sc].1.2152)
+				sc.2613(fl)
+			SetTimer,Enable,-10
+			SetTimer,LButton,-20
+		*/
 		return
 	}if(!s.ctrl[NumGet(info+0)])
 		return csc(1)
@@ -164,7 +173,11 @@ Notify(csc:=""){
 	if(v.options.full_auto)
 		SetTimer,fullauto,10
 	return
-	enable:
+	Disable:
+	for a,b in s.ctrl
+		GuiControl,1:-Redraw,% b.sc
+	return
+	Enable:
 	for a,b in s.ctrl
 		GuiControl,1:+Redraw,% b.sc
 	return

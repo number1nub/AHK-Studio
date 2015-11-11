@@ -16,7 +16,7 @@ History(file=""){
 			SetTimer,historyset,-20
 			return
 			historyset:
-			setpos(ltv:=last.pop())
+			SetPos(ltv:=last.pop())
 			return
 		}
 	}else

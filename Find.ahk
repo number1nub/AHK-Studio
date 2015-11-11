@@ -65,17 +65,23 @@ Find(){
 	}else if(Button="jump"){
 		ea:=foundinfo[TV_GetSelection()]
 		Gui,1:+Disabled
-		if(ea.file!=current(3).file){
-			tv(files.ssn("//*[@file='" ea.file "']/@tv").text)
-			Sleep,100
-			WinActivate,% hwnd([5])
-		}
-		sc:=csc(),sc.2397(0),sc.2376,sc.2160(ea.start,ea.end),sc.2169,notify(0),CenterSel(),Notify("setpos")
-		if(v.options.auto_close_find){
-			hwnd({rem:5})
-			Gui,1:-Disabled
-		}else
-			WinActivate,% hwnd([5])
+		SetPos(ea)
+		/*
+			if(ea.file!=current(3).file){
+				tv(files.ssn("//*[@file='" ea.file "']/@tv").text)
+				Sleep,100
+				WinActivate,% hwnd([5])
+			}
+		*/
+		
+		/*
+			sc:=csc(),sc.2397(0),sc.2376,sc.2160(ea.start,ea.end),sc.2169,notify(0),CenterSel(),Notify("setpos")
+			if(v.options.auto_close_find){
+				hwnd({rem:5})
+				Gui,1:-Disabled
+			}else
+				WinActivate,% hwnd([5])
+		*/
 	}else{
 		sel:=TV_GetSelection(),TV_Modify(sel,ec:=TV_Get(sel,"E")?"-Expand":"Expand")
 		SetTimer,findlabel,-200

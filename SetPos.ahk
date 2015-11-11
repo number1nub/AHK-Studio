@@ -1,5 +1,19 @@
-SetPos(tv:=""){
+SetPos(oea:=""){
 	static
+	if(IsObject(oea)){
+		posinfo:=positions.ssn("//main[@file='" files.ssn("//*[@file='" oea.file "']/ancestor::main/@file").text "']/file[@file='" oea.file "']")
+		nea:=files.ea("//*[@sc='" sc.2357 "']"),cea:=files.ea("//*[@file='" oea.file "']")
+		SetTimer,Disable,-1
+		Sleep,2
+		if(oea.file!=nea.file)
+			tv(cea.tv,2,1)
+		for a,b in oea
+			posinfo.SetAttribute(a,b)
+		sc.2160(oea.start,oea.end)
+		SetTimer,CenterSel,-50
+		SetTimer,Enable,-250
+		return
+	}
 	delay:=(WinActive("A")=hwnd(1))?1:300
 	if(delay=1)
 		goto,spnext
@@ -19,7 +33,8 @@ SetPos(tv:=""){
 			SetTimer,setscrollpos,-1
 		return
 		setscrollpos:
-		sc.2613(ea.scroll),sc.2400()
+		if(ea.scroll)
+			sc.2613(ea.scroll),sc.2400()
 		return
 	}
 	return

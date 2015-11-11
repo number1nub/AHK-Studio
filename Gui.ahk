@@ -3,7 +3,8 @@ Gui(){
 	static controls:=["Static1","Edit1","Button1","Button2","Button3","Button4"]
 	Gui,+hwndhwnd +Resize +OwnDialogs
 	hwnd(1,hwnd),rb:=new rebar(1,hwnd),v.rb:=rb,pos:=settings.ssn("//gui/position[@window='1']")
-	OnMessage(6,"Activate"),v.opening:=1
+	;OnMessage(6,"Activate")
+	v.opening:=1
 	Gui,Margin,0,0
 	Gui,Add,TreeView,xm hwndce c0xff00ff w150
 	Gui,Add,TreeView,hwndpe c0xff00ff w150 gcej

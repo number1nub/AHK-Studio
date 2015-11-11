@@ -56,4 +56,3 @@ Color(con:=""){
 			con.2041(24+A_Index,ea.color!=""?ea.color:"0"),con.2042(24+A_Index,ea.background!=""?ea.Background:"0xaaaaaa")
 	}marginwidth()
 }
-#Include Tab Width.ahk

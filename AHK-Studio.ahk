@@ -33,15 +33,8 @@ tv(files.ssn("//*[@file='" v.openfile "']/@tv").text)
 return
 #Include %A_ScriptDir%
 #Include About.ahk
-#Include Activate.ahk
 #Include AutoMenu.ahk
 #Include BookEnd.ahk
-#Include Brace.ahk
-#Include BraceSetup.ahk
-#Include Center.ahk
-#Include CenterSel.ahk
-#Include Check For Edited.ahk
-#Include Class Code Explorer.ahk
 #Include Class FTP.ahk
 #Include Class Icon Browser.ahk
 #Include Class Omni Search.ahk
@@ -52,6 +45,12 @@ return
 #Include Class XML.ahk
 #Include Clean.ahk
 #Include Clear Line Status.ahk
+#Include Brace.ahk
+#Include BraceSetup.ahk
+#Include Center.ahk
+#Include CenterSel.ahk
+#Include Check For Edited.ahk
+#Include Class Code Explorer.ahk
 #Include Close.ahk
 #Include Color.ahk
 #Include Command Help.ahk
@@ -77,7 +76,6 @@ return
 #Include DynaRun.ahk
 #Include Edit Replacements.ahk
 #Include Encode.ahk
-#Include Escape.ahk
 #Include ExecScript.ahk
 #Include Exit.ahk
 #Include Export.ahk
@@ -190,6 +188,7 @@ return
 #Include Show Scintilla Code In Line.ahk
 #Include ShowLabels.ahk
 #Include Stop.ahk
+#Include Tab Width.ahk
 #Include Test Plugin.ahk
 #Include Testing.ahk
 #Include Toggle Comment Line.ahk
@@ -205,6 +204,7 @@ return
 #Include Widths.ahk
 #Include WinPos.ahk
 #Include Words In Document.ahk
+#Include Escape.ahk
 ;plugin
 #Include Quick Scintilla Code Lookup.ahk
 #Include Scintilla Code Lookup.ahk

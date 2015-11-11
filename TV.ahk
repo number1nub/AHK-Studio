@@ -1,7 +1,8 @@
 tv(tv:=0,open:="",history:=0){
-	static fn,noredraw
+	static fn,noredraw,tvbak
 	Gui,1:Default
 	Gui,1:TreeView,SysTreeView321
+	tvbak:=tv
 	TV_Modify(tv,"Select Vis Focus")
 	if(open=""&&history=0)
 		return
@@ -10,7 +11,7 @@ tv(tv:=0,open:="",history:=0){
 		SetTimer,matchfile,Off
 		if(!v.startup)
 			getpos(),count:=0
-		ei:=open?tv:a_eventinfo,sc:=csc(),file:=files.ssn("//*[@tv='" ei "']"),fn:=ssn(file,"@file").text
+		ei:=open?tvbak:a_eventinfo,sc:=csc(),file:=files.ssn("//*[@tv='" ei "']"),fn:=ssn(file,"@file").text
 		sc.Enable()
 		if(file.nodename!="file")
 			return
@@ -42,6 +43,8 @@ tv(tv:=0,open:="",history:=0){
 		setpos(ei),uppos(),marginwidth(sc)
 		if(history!=1)
 			History(fn)
+		if(open=2)
+			
 		history:=0
 		WinSetTitle,% hwnd([1]),,AHK Studio - %fn%
 		sc.4004("fold",[1])
