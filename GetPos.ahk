@@ -1,4 +1,4 @@
-getpos(){
+GetPos(){
 	if(!current(1).xml)
 		return
 	sc:=csc(),current:=current(2).file,code_explorer.scan(current()),cf:=current(3).file
@@ -14,7 +14,7 @@ getpos(){
 	if(list)
 		fix.SetAttribute("fold",Trim(list,","))
 	pos:=positions.ssn("//main[@file='" current(2).file "']/file[@file='" current(3).file "']"),line:=0,bp:=""
-	while,sc.2047(line,1)>=0,line:=sc.2047(line,1)
+	while,sc.2047(line,2)>=0,line:=sc.2047(line,2)
 		bp.=line ",",line++
 	if(bp:=Trim(bp,","))
 		pos.SetAttribute("breakpoint",bp)

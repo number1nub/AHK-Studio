@@ -63,25 +63,17 @@ Find(){
 		SetTimer,findlabel,-200
 		GuiControl,5:+gstate,SysTreeView321
 	}else if(Button="jump"){
-		ea:=foundinfo[TV_GetSelection()]
 		Gui,1:+Disabled
-		SetPos(ea)
-		/*
-			if(ea.file!=current(3).file){
-				tv(files.ssn("//*[@file='" ea.file "']/@tv").text)
-				Sleep,100
-				WinActivate,% hwnd([5])
-			}
-		*/
-		
-		/*
-			sc:=csc(),sc.2397(0),sc.2376,sc.2160(ea.start,ea.end),sc.2169,notify(0),CenterSel(),Notify("setpos")
-			if(v.options.auto_close_find){
-				hwnd({rem:5})
-				Gui,1:-Disabled
-			}else
-				WinActivate,% hwnd([5])
-		*/
+		ea:=foundinfo[TV_GetSelection()],SetPos(ea),xpos:=sc.2164(0,ea.start),ypos:=sc.2165(0,ea.start)
+		Sleep,300
+		WinGetPos,xx,yy,ww,hh,% newwin.ahkid
+		WinGetPos,px,py,,,% "ahk_id" sc.sc
+		WinGet,trans,Transparent,% newwin.ahkid
+		cxpos:=px+xpos,cypos:=py+ypos
+		if(cxpos>xx&&cxpos<xx+ww&&cypos>yy&&cypos<yy+hh)
+			WinSet,Transparent,50,% newwin.ahkid
+		else if(trans=50)
+			WinSet,Transparent,255,% newwin.ahk
 	}else{
 		sel:=TV_GetSelection(),TV_Modify(sel,ec:=TV_Get(sel,"E")?"-Expand":"Expand")
 		SetTimer,findlabel,-200

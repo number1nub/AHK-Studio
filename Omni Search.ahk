@@ -61,6 +61,7 @@ Omni_Search(start=""){
 	for a,b in searchobj:=StrSplit(search)
 		stext[b]:=stext[b]=""?1:stext[b]+1
 	list:=cexml.sn(find),break:=0,currentparent:=current(2).file
+	;return m(find,list.length)
 	while,ll:=list.Item[A_Index-1],b:=xml.ea(ll){
 		if(break){
 			break:=0
@@ -133,11 +134,11 @@ Omni_Search(start=""){
 		sc.2003(sc.2008,build)
 	}else if(item.type="file"){
 		hwnd({rem:20}),tv(files.ssn("//main[@file='" item.parent "']/descendant::file[@file='" item.file "']/@tv").text)
-	}else if(item.type~="i)(label|instance|method|function|hotkey|class|property|variable|bookmark)"){
+	}else if(item.type~="i)(breakpoint|label|instance|method|function|hotkey|class|property|variable|bookmark)"){
 		hwnd({rem:20}),TV(files.ssn("//*[@file='" item.file "']/@tv").text)
 		Sleep,200
 		item.text:=item.type="class"?"class " item.text:item.text
-		(item.type="bookmark")?(sc:=csc(),line:=sc.2166(item.pos),sc.2160(sc.2128(line),sc.2136(line)),hwnd({rem:20}),CenterSel()):(csc().2160(item.pos,item.pos+StrPut(item.text,"Utf-8")-1),v.sc.2169,getpos(),v.sc.2400)
+		(item.type~="i)bookmark|breakpoint")?(sc:=csc(),line:=sc.2166(item.pos),sc.2160(sc.2128(line),sc.2136(line)),hwnd({rem:20}),CenterSel()):(csc().2160(item.pos,item.pos+StrPut(item.text,"Utf-8")-1),v.sc.2169,getpos(),v.sc.2400)
 	}
 	return
 	omnikey:

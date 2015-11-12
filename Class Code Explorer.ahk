@@ -61,9 +61,17 @@ Class Code_Explorer{
 			while,pos:=RegExMatch(text,"Osm`n)(\w+)\s*:=",var,pos),pos:=var.Pos(1)+var.len(1)
 				if(!ssn(main,"descendant::*[@type='Variable'][@text='" var.1 "'] or descendant::*[@type='Instance'][@text='" var.1 "']"))
 					cexml.under(next,"info",{type:"Variable",upper:upper(var.1),pos:StrPut(SubStr(text,1,var.Pos(1)),"utf-8")-3,text:var.1})
-		}pos:=1
-		while,pos:=RegExMatch(text,"OU);#\[(.*)\]",found,pos),pos:=found.Pos(1)+found.len(1)
-			cexml.under(next,"info",{type:"Bookmark",upper:upper(found.1),pos:StrPut(SubStr(text,1,found.Pos(0)),"utf-8"),text:found.1})
+		}
+		for a,b in {Bookmark:"\s+;#\[(.*)\]",Breakpoint:"\s+;\*\[(.*)\]"}{
+			pos:=1
+			while,pos:=RegExMatch(text,"OU)" b,found,pos),pos:=found.Pos(1)+found.len(1){
+				nnn:=cexml.under(next,"info",{type:a,upper:upper(found.1),pos:StrPut(enter:=SubStr(text,1,found.Pos(0)),"utf-8"),text:found.1})
+				if(a="Breakpoint"){
+					RegExReplace(enter,"\R",,Count)
+					nnn.SetAttribute("line",Count),nnn.SetAttribute("filename",fnme)
+				}
+			}
+		}
 	}remove(filename){
 		this.explore.remove(ssn(filename,"@file").text),list:=sn(filename,"@file")
 		while,ll:=list.item[A_Index-1]

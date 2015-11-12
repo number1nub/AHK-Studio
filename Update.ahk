@@ -24,8 +24,10 @@ Update(info){
 			return
 		if(update[item]=sc.getuni())
 			return
-		if(updated[item]="")
-			TV_Modify(ea.tv,"","*" ea.filename)
+		if(updated[item]=""){	;#[FIXED: Maintain 'Hide File Extensions' option when updating project explorer]
+			SplitPath,% ea.filename,,,,nne
+			TV_Modify(ea.tv,"","*" (v.options.Hide_File_Extensions?nne:ea.filename))
+		}
 		if(v.options.disable_line_status!=1){
 			pos:=posinfo(),line:=sc.2166(pos.start),end:=sc.2166(pos.end)
 			if(line!=end){

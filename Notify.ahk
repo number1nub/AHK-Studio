@@ -63,6 +63,14 @@ Notify(csc:=""){
 				else
 					text:=sc.gettext(),text:=SubStr(text,1,sc.2128(line)),slash:=RegExMatch(text,"(\s*;#\[.*\])")?"/":"",end:=sc.2136(line),start:=sc.2128(line),_:=start=end?(add:=3+StrLen(slash),space:=""):(add:=4+StrLen(slash),space:=" "),sc.2003(end,space Chr(59) "#[" slash (name:=SubStr(current(3).filename,1,-4)) "]"),sc.2160(end+add,end+add+StrPut(name,utf-8)-1)
 			}else if(GetKeyState("Shift","P")){
+				m("breakpoint set/remove 0;*[description]")
+				/*
+					if(sc.2047(line,1)=line)
+						sc.2044(line,-1) ;,m("here",line)
+					else
+						sc.2043(line,1) ;,m(sc.2047(line,1)=line,sc.2047(line,1),line)
+				*/
+				;m(sc.2047(line-2,2),sc.2046(line))
 				/*
 					add the stop point for debugging
 				*/

@@ -43,8 +43,11 @@ save(option=""){
 		file:=fileopen(filename,"rw",encoding),file.seek(0),file.write(text),file.length(file.position)
 		Gui,1:TreeView,% hwnd("fe")
 		multi:=files.sn("//file[@file='" filename "']")
-		while,mm:=multi.item[A_Index-1]
-			ea:=files.ea(mm),TV_Modify(ea.tv,"",ea.filename)
+		while,mm:=multi.item[A_Index-1]{
+			ea:=files.ea(mm)
+			SplitPath,% ea.filename,,,,nne
+			TV_Modify(ea.tv,"",v.options.Hide_File_Extensions?nne:ea.filename) ;#[FIXED: Maintain 'Hide File Extensions' option when updating project explorer]
+		}
 		FileGetTime,time,%filename%
 		ff:=files.sn("//*[@file='" filename "']")
 		while,fff:=ff.item[A_Index-1]

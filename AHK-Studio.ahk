@@ -211,3 +211,6 @@ return
 #Include Scintilla.ahk
 ;/plugin
 #Include Check For Updates.ahk
+#Include Step Into.ahk
+#Include Step Over.ahk
+#Include Step Out.ahk
