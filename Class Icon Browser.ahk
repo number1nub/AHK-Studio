@@ -20,8 +20,7 @@ Class Icon_Browser{
 		loaddefault:
 		this:=icon_browser.keep,this.file:="shell32.dll",this.start:=0,this.populate(),settings.add("icons",{"last":this.file})
 		return
-	}
-	select(num:=""){
+	}select(num:=""){
 		select:
 		if(A_GuiEvent!="I")
 			return
@@ -42,8 +41,7 @@ Class Icon_Browser{
 		if(this.focus)
 			WinActivate,% this.focus
 		return
-	}
-	load(filename:=""){
+	}load(filename:=""){
 		loadfile:
 		this:=icon_browser.keep
 		if(!filename){
@@ -56,12 +54,10 @@ Class Icon_Browser{
 			return this.select("image")
 		this.populate(),settings.add("icons",{"last":filename}),filename:=""
 		return
-	}
-	exit(){
+	}exit(){
 		for win in icon_browser.window
 			Gui,%win%:Destroy
-	}
-	populate(){
+	}populate(){
 		GuiControl,85:-Redraw,SysListView321
 		il:=IL_Create(50,10,1),LV_SetImageList(il)
 		while,icon:=IL_Add(il,this.file,A_Index)

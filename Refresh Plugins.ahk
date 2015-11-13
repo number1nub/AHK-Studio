@@ -1,3 +1,3 @@
 Refresh_Plugins(){
-	plugins(1)
+	Plugins(1)
 }

@@ -214,3 +214,4 @@ return
 #Include Step Into.ahk
 #Include Step Over.ahk
 #Include Step Out.ahk
+#Include NewLines.ahk

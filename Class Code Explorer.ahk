@@ -13,23 +13,26 @@ Class Code_Explorer{
 			if(!no.ssn("//bad[@min<'" found.pos(1) "' and @max>'" found.pos(1) "']"))
 				cexml.under(next,"info",{type:"Class",opos:found.Pos(1)-1,pos:ppp:=StrPut(SubStr(text,1,found.Pos(1)),"utf-8")-3,text:RegExReplace(found.1,"i)^(class|\s)"),upper:upper(RegExReplace(found.1,"i)(class\s+)"))})
 		clist:=sn(next,"descendant::info[@type='Class']")
-		while,cc:=clist.item[A_Index-1],ea:=xml.ea(cc){
-			tt:=SubStr(text,ea.pos+1),total:="",braces:=0,start:=0
-			for a,b in StrSplit(tt,"`n"){
-				line:=Trim(RegExReplace(b,"(\s+" Chr(59) ".*)"))
+		while,cc:=clist.item[A_Index-1],ea:=xml.ea(cc),tt:=SubStr(text,ea.opos),total:="",braces:=start:=lbraces:=0{
+			for a,b in StrSplit(tt,"`n","`r`n"){
+				line:=Trim(RegExReplace(b,"(\s+" Chr(59) ".*)\R?"))
 				if(SubStr(line,1,1)="}"){
 					while,((found1:=SubStr(line,A_Index,1))~="(}|\s)"){
 						if(found1~="\s")
 							Continue
 						braces--
-					}
-				}
-				if(start&&braces=0)
+				}}if(start&&braces<=0){
+					for c,d in StrSplit(line)
+						if(RegExMatch(d,"[}|\s]")&&lbraces>0)
+							total.=d,lbraces--
 					break
-				total.=b "`n"
+				}total.=b "`n"
 				if(SubStr(line,0,1)="{")
 					braces++,start:=1
-			}lasteapos:=ea.pos,total:=Trim(total,"`n"),cc.SetAttribute("end",np:=ea.pos+StrPut(total,"utf-8")-1)
+				lbraces:=braces
+			}
+			
+			lasteapos:=ea.pos,total:=Trim(total,"`n"),cc.SetAttribute("end",np:=ea.pos+StrPut(total,"utf-8")-1)
 			for a,b in {Property:Code_Explorer.property,Method:Code_Explorer.function}{
 				pos:=1
 				while,RegExMatch(total,b,found,pos),pos:=found.Pos(1)+found.len(1)
