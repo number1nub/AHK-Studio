@@ -81,9 +81,12 @@ Find(){
 	return
 	state:
 	if(A_GuiEvent="DoubleClick"){
-		ea:=foundinfo[TV_GetSelection()],sc:=csc(),tv(files.ssn("//*[@file='" ea.file "']/@tv").text)
+		info:=newwin[]
+		ea:=foundinfo[TV_GetSelection()]
 		Sleep,200
-		return sc.2160(ea.start,ea.end),sc.2169,CenterSel(),notify(0)
+		SetPos({start:ea.start,end:ea.end,file:ea.file})
+		if(info.acdc)
+			goto,5GuiClose
 	}if(A_GuiEvent=="f")
 		return
 	sel:=TV_GetSelection()
@@ -115,7 +118,7 @@ Find(){
 	5GuiEscape:
 	5GuiClose:
 	Gui,5:Submit,NoHide
-	ea:=newwin[],settings.add("search/find",{regex:ea.regex,cs:ea.cs,sort:ea.sort,gr:ea.gr,allfiles:ea.allfiles}),foundinfo:="",positions.ssn("//*[@file='" file "']/@search").text:=ea.find,hwnd({rem:5})
+	ea:=newwin[],settings.add("search/find",{acdc:ea.acdc,regex:ea.regex,cs:ea.cs,sort:ea.sort,gr:ea.gr,allfiles:ea.allfiles}),foundinfo:="",positions.ssn("//*[@file='" file "']/@search").text:=ea.find,hwnd({rem:5})
 	return
 	comment:
 	sc:=csc()
