@@ -122,7 +122,8 @@ Class Code_Explorer{
 	}cej(){
 		static last
 		cej:
-		if((A_GuiEvent="S"||A_EventInfo=last)&&A_GuiEvent!="RightClick"){
+		t(A_GuiEvent)
+		if((A_GuiEvent="S"||A_GuiEvent="Normal"||A_EventInfo=last)&&A_GuiEvent!="RightClick"){
 			list:="",last:=A_EventInfo
 			if(found:=code_explorer.TreeView.ssn("//*[@tv='" A_EventInfo "']")){
 				ea:=xml.ea(found)
