@@ -10,7 +10,7 @@ Gui(){
 	v.opening:=1
 	Gui,Margin,0,0
 	Gui,Add,TreeView,xm hwndce c0xff00ff w150
-	Gui,Add,TreeView,hwndpe c0xff00ff w150 gcej
+	Gui,Add,TreeView,hwndpe c0xff00ff w150 gcej AltSubmit
 	sc:=new s(1,{pos:"w200 h200",main:1}),TV_Add("Right Click to refresh")
 	Gui,Add,Text,xm+3 c0xAAAAAA,Quick Find
 	Gui,Add,Edit,x+2 w200 c0xAAAAAA gqf

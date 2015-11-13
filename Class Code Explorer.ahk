@@ -122,10 +122,10 @@ Class Code_Explorer{
 	}cej(){
 		static last
 		cej:
-		t(A_GuiEvent)
-		if((A_GuiEvent="S"||A_GuiEvent="Normal"||A_EventInfo=last)&&A_GuiEvent!="RightClick"){
-			list:="",last:=A_EventInfo
-			if(found:=code_explorer.TreeView.ssn("//*[@tv='" A_EventInfo "']")){
+		if(A_GuiEvent="Normal"&&A_GuiEvent!="RightClick"){
+			list:=""
+			Default("TreeView","SysTreeView322")
+			if(found:=code_explorer.TreeView.ssn("//*[@tv='" TV_GetSelection() "']")){
 				ea:=xml.ea(found)
 				if(ea.pos="")
 					return
