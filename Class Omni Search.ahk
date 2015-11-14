@@ -9,7 +9,7 @@ class omni_search_class{
 		rem:=cexml.ssn("//menu"),rem.ParentNode.RemoveChild(rem),this.menulist:=[],list:=menus.sn("//menu"),top:=cexml.Add("menu")
 		while,mm:=list.item[A_Index-1],ea:=xml.ea(mm){
 			clean:=ea.clean,hotkey:=convert_hotkey(ea.hotkey)
-			StringReplace,clean,clean,_,%A_Space%,all
+			StringReplace,clean,clean,_,%A_Space%,All
 			launch:=IsFunc(ea.clean)?"func":IsLabel(ea.clean)?"label":""
 			if(launch=""&&ea.plugin="")
 				Continue

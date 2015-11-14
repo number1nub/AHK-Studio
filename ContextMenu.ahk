@@ -14,7 +14,7 @@ ContextMenu(){
 		return
 	}
 	if(InStr(ctl,"Scintilla")){
-		for a,b in ["Bookmark Search","Class Search","Close","Copy","Cut","Delete","Function Search","Hotkey Search","Instance Search","Menu Search","Method Search","Open Folder","Paste","Property Search","Redo","Search Label","Select All","Undo"]
+		for a,b in ["Undo","Redo","Copy","Cut","Paste","Select All","Close","Delete","","Open Folder","Bookmark Search","Class Search","Function Search","Hotkey Search","Instance Search","Menu Search","Method Search","Property Search","Search Label"]
 			Menu,rcm,Add,%b%,SciRCM
 		Menu,rcm,Show
 		Menu,rcm,DeleteAll
