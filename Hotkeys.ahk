@@ -42,7 +42,7 @@ Hotkeys(win,item,track:=0){
 	ea:=menus.ea("//*[@hotkey='" A_ThisHotkey "']")
 	if(ea.plugin){
 		if(!FileExist(ea.plugin))
-			MissingPlugin(ea.plugin)
+			MissingPlugin(ea.plugin,ea.clean)
 		else
 			Run,% Chr(34) ea.plugin Chr(34) " " Chr(34) ea.option Chr(34)
 	}else if(IsLabel(ea.clean)||IsFunc(ea.clean))

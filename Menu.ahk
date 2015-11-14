@@ -45,7 +45,7 @@ Menu(menuname:="main"){
 	item:=clean(A_ThisMenuItem),ea:=menus.ea("//*[@clean='" item "']"),plugin:=ea.plugin,option:=ea.option
 	if(plugin){
 		if(!FileExist(plugin))
-			MissingPlugin(plugin)
+			MissingPlugin(plugin,item)
 		else
 			Run,"%plugin%" %option%
 		; , , ,

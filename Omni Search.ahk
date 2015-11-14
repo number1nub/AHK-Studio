@@ -125,9 +125,8 @@ Omni_Search(start=""){
 			v.runfunc:=text
 			SetTimer,runfunc,-100
 		}else{
-			
 			if(!FileExist(type))
-				MissingPlugin(type)
+				MissingPlugin(type,item.sort)
 			else{
 				option:=menus.ssn("//*[@clean='" RegExReplace(item.sort," ","_") "']/@option").text
 				Run,%type% "%option%"
