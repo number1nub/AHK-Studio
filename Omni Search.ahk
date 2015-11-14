@@ -124,8 +124,14 @@ Omni_Search(start=""){
 		else if(type="func"){
 			v.runfunc:=text
 			SetTimer,runfunc,-100
-		}else
-			Run,%type%
+		}else{
+			if(!FileExist(type))
+				MissingPlugin(type)
+			else{
+				option:=menus.ssn("//*[@plugin='" type "']/@option").text
+				Run,%type% "%option%"
+			}
+		}
 		hwnd({rem:20})
 	}else if(pre="+"){
 		hwnd({rem:20}),args:=item.args,sc:=csc(),args:=RegExReplace(args,"U)=?" chr(34) "(.*)" chr(34)),build:=item.text "("

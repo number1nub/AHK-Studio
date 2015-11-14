@@ -40,9 +40,12 @@ Hotkeys(win,item,track:=0){
 	if(IsFunc(func))
 		return %func%()
 	ea:=menus.ea("//*[@hotkey='" A_ThisHotkey "']")
-	if(ea.plugin)
-		Run,% Chr(34) ea.plugin Chr(34) " " Chr(34) ea.option Chr(34)
-	else if(IsLabel(ea.clean)||IsFunc(ea.clean))
+	if(ea.plugin){
+		if(!FileExist(ea.plugin))
+			MissingPlugin(ea.plugin)
+		else
+			Run,% Chr(34) ea.plugin Chr(34) " " Chr(34) ea.option Chr(34)
+	}else if(IsLabel(ea.clean)||IsFunc(ea.clean))
 		SetTimer,% ea.clean,-10
 	return
 }

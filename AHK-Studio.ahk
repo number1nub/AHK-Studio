@@ -215,3 +215,8 @@ return
 #Include Step Over.ahk
 #Include Step Out.ahk
 #Include NewLines.ahk
+#Include Missing Plugin.ahk
+#Include Undo.ahk
+#Include Redo.ahk
+#Include Cut.ahk
+#Include Select All.ahk

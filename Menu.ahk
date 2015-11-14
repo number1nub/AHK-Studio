@@ -14,8 +14,8 @@ Menu(menuname:="main"){
 				Menu,%parent%,Add
 				Continue
 			}
-			if((!IsFunc(ea.clean)&&!IsLabel(ea.clean))&&!FileExist(ea.plugin)){
-				aa.SetAttribute("no",1)
+			if((!IsFunc(ea.clean)&&!IsLabel(ea.clean))&&!ea.plugin){
+				aa.SetAttribute("no",1),fixlist.=ea.clean "`n"
 				Continue
 			}if(ea.no)
 				aa.RemoveAttribute("no")
@@ -32,6 +32,7 @@ Menu(menuname:="main"){
 		}if(ea.icon!=""&&ea.filename)
 			Menu,%Parent%,Icon,% ea.name hotkey,% ea.filename,% ea.icon
 	}
+	;m(Clipboard:=fixlist)
 	for a,b in track{
 		if(!Exist[b.name])
 			Menu,% b.parent,Delete,% b.name
@@ -43,7 +44,11 @@ Menu(menuname:="main"){
 	MenuRoute:
 	item:=clean(A_ThisMenuItem),ea:=menus.ea("//*[@clean='" item "']"),plugin:=ea.plugin,option:=ea.option
 	if(plugin){
-		Run,"%plugin%" %option%
+		if(!FileExist(plugin))
+			MissingPlugin(plugin)
+		else
+			Run,"%plugin%" %option%
+		; , , ,
 		return
 	}
 	if(IsFunc(item))

@@ -30,7 +30,7 @@ Plugins(refresh:=0){
 			if(!ii:=menus.ssn("//*[@clean='" clean(Trim(item.1)) "']"))
 				menus.under(plugin,"menu",{name:Trim(item.1),clean:clean(item.1),plugin:A_LoopFileFullPath,option:item.2,hotkey:plHks[item.1]})
 			else
-				ii.SetAttribute("plugin",A_LoopFileFullPath)
+				ii.SetAttribute("plugin",A_LoopFileFullPath),ii.SetAttribute("option",item.2)
 			pos:=found.Pos(1)+1
 		}
 	}

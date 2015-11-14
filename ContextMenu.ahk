@@ -2,6 +2,29 @@ ContextMenu(){
 	GuiContextMenu:
 	ControlGetFocus,Focus,% hwnd([1])
 	MouseGetPos,,,,ctl ;#[ADDED: Context menu shown when quick find is right clicked allowing moving between top & bottom]
+	MouseGetPos,,,,control,2
+	if(control=v.debug.sc){
+		Menu,rcm,Add,Close,SciDebug
+		Menu,rcm,Show
+		Menu,rcm,Delete
+		return
+		SciDebug:
+		if(A_ThisMenuItem="Close")
+			stop()
+		return
+	}
+	if(InStr(ctl,"Scintilla")){
+		for a,b in ["Bookmark Search","Class Search","Close","Copy","Cut","Delete","Function Search","Hotkey Search","Instance Search","Menu Search","Method Search","Open Folder","Paste","Property Search","Redo","Search Label","Select All","Undo"]
+			Menu,rcm,Add,%b%,SciRCM
+		Menu,rcm,Show
+		Menu,rcm,DeleteAll
+		return
+		SciRCM:
+		item:=clean(A_ThisMenuItem)
+		if(IsFunc(item))
+			%item%()
+		return
+	}
 	if(ctl="Static1"||ctl="Edit1"){
 		Menu,qfm,Add,% "Move to " (v.options.top_find?"Bottom":"Top"),Top_Find
 		Menu,qfm,Show
