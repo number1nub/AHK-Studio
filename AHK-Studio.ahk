@@ -33,6 +33,7 @@ tv(files.ssn("//*[@file='" v.openfile "']/@tv").text)
 return
 #Include %A_ScriptDir%
 #Include About.ahk
+#Include AddBookmark.ahk
 #Include AutoMenu.ahk
 #Include BookEnd.ahk
 #Include Brace.ahk

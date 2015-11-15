@@ -1,3 +1,3 @@
 ProjectFolder(){
-	return settings.ssn("//directory").text?settings.ssn("//directory").text:A_ScriptDir "\Project"
+	return settings.ssn("//directory").text?settings.ssn("//directory").text:A_ScriptDir "\Projects"
 }

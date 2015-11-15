@@ -56,11 +56,11 @@ Notify(csc:=""){
 		if(margin=3)
 			sc.2231(line)
 		if(margin=1){
-			text:=Trim(sc.getline(line)),search:=GetKeyState("Shift","P")?["*","UO)(\s*;\*\[.*\])"]:["#","UO)(\s*;#\[.*\])"]
+			shift:=GetKeyState("Shift","P"),ShiftBP:=v.options.Shift_Breakpoint,text:=Trim(sc.getline(line)),search:=(shift&&ShiftBP||!shift&&!ShiftBP)?["*","UO)(\s*;\*\[.*\])"]:["#","UO)(\s*;#\[.*\])"]
 			if(RegExMatch(text,search.2))
 				start:=sc.2128(line),pos:=RegExMatch(text,search.2,found),sc.2190(start+pos-1),sc.2192(start+pos-1+found.len(1)),sc.2194(0,""),code_explorer.scan(current())
 			else
-				text:=sc.gettext(),text:=SubStr(text,1,sc.2128(line)),slash:=RegExMatch(text,search.2)?"/":"",end:=sc.2136(line),start:=sc.2128(line),_:=start=end?(add:=3+StrLen(slash),space:=""):(add:=4+StrLen(slash),space:=" "),sc.2003(end,space Chr(59) search.1 "[" slash (name:=SubStr(current(3).filename,1,-4)) "]"),sc.2160(end+add,end+add+StrPut(name,utf-8)-1)
+				AddBookmark(line,search)
 		}
 	}if(fn.code=2022){
 		if v.options.Autocomplete_Enter_Newline

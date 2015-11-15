@@ -108,6 +108,7 @@ Options(x:=0){
 	Disable_Auto_Complete_In_Quotes:
 	Virtual_Scratch_Pad:
 	Includes_In_Place:
+	Shift_Breakpoint:
 	onoff:=settings.ssn("//options/@ " A_ThisLabel).text?0:1
 	att:=[],att[A_ThisLabel]:=onoff,v.options[A_ThisLabel]:=onoff
 	settings.add("options",att)
