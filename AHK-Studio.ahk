@@ -35,6 +35,13 @@ return
 #Include About.ahk
 #Include AutoMenu.ahk
 #Include BookEnd.ahk
+#Include Brace.ahk
+#Include BraceSetup.ahk
+#Include Center.ahk
+#Include CenterSel.ahk
+#Include Check For Edited.ahk
+#Include Check For Updates.ahk
+#Include Class Code Explorer.ahk
 #Include Class FTP.ahk
 #Include Class Icon Browser.ahk
 #Include Class Omni Search.ahk
@@ -42,15 +49,9 @@ return
 #Include Class Rebar.ahk
 #Include Class Scintilla.ahk
 #Include Class Toolbar.ahk
+#Include Class XML.ahk
 #Include Clean.ahk
 #Include Clear Line Status.ahk
-#Include Brace.ahk
-#Include BraceSetup.ahk
-#Include Center.ahk
-#Include CenterSel.ahk
-#Include Check For Edited.ahk
-#Include Class Code Explorer.ahk
-#Include Class XML.ahk
 #Include Close.ahk
 #Include Color.ahk
 #Include Command Help.ahk
@@ -63,6 +64,7 @@ return
 #Include Copy.ahk
 #Include CSC.ahk
 #Include Current.ahk
+#Include Cut.ahk
 #Include Debug Settings.ahk
 #Include Default.ahk
 #Include DefaultFont.ahk
@@ -76,6 +78,7 @@ return
 #Include DynaRun.ahk
 #Include Edit Replacements.ahk
 #Include Encode.ahk
+#Include Escape.ahk
 #Include ExecScript.ahk
 #Include Exit.ahk
 #Include Export.ahk
@@ -116,6 +119,7 @@ return
 #Include Margin Width.ahk
 #Include Menu.ahk
 #Include MenuWipe.ahk
+#Include Missing Plugin.ahk
 #Include Move Selected Lines Down.ahk
 #Include Move Selected Lines Up.ahk
 #Include MsgBox.ahk
@@ -124,6 +128,7 @@ return
 #Include New Scintilla Window.ahk
 #Include New Segment.ahk
 #Include New.ahk
+#Include NewLines.ahk
 #Include Next File.ahk
 #Include Next Found.ahk
 #Include Notes.ahk
@@ -146,6 +151,7 @@ return
 #Include Publish.ahk
 #Include QF.ahk
 #Include QFS.ahk
+#Include Redo.ahk
 #Include Refresh Current Project.ahk
 #Include Refresh Plugins.ahk
 #Include Refresh Project Explorer.ahk
@@ -175,6 +181,7 @@ return
 #Include Search Label.ahk
 #Include Search.ahk
 #Include Segment From Selection.ahk
+#Include Select All.ahk
 #Include Select Current Word.ahk
 #Include Select Next Duplicate.ahk
 #Include SelectAll.ahk
@@ -187,6 +194,9 @@ return
 #Include Show Class Methods.ahk
 #Include Show Scintilla Code In Line.ahk
 #Include ShowLabels.ahk
+#Include Step Into.ahk
+#Include Step Out.ahk
+#Include Step Over.ahk
 #Include Stop.ahk
 #Include Tab Width.ahk
 #Include Test Plugin.ahk
@@ -196,6 +206,7 @@ return
 #Include Toggle Multiple Line Comment.ahk
 #Include TV.ahk
 #Include TVIcons.ahk
+#Include Undo.ahk
 #Include Update.ahk
 #Include Upper.ahk
 #Include UpPos.ahk
@@ -204,19 +215,8 @@ return
 #Include Widths.ahk
 #Include WinPos.ahk
 #Include Words In Document.ahk
-#Include Escape.ahk
 ;plugin
 #Include Quick Scintilla Code Lookup.ahk
 #Include Scintilla Code Lookup.ahk
 #Include Scintilla.ahk
 ;/plugin
-#Include Check For Updates.ahk
-#Include Step Into.ahk
-#Include Step Over.ahk
-#Include Step Out.ahk
-#Include NewLines.ahk
-#Include Missing Plugin.ahk
-#Include Undo.ahk
-#Include Redo.ahk
-#Include Cut.ahk
-#Include Select All.ahk

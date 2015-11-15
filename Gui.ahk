@@ -128,4 +128,6 @@ Gui(){
 	GuiClose:
 	SetTimer,Exit,-1
 	return
+	deadend:
+	return
 }

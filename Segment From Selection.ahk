@@ -11,22 +11,11 @@ Create_Segment_From_Selection(){
 			return
 		if(FileExist(newsegment))
 			return m("Segment name already exists. Please choose another")
-		text:=sc.getseltext(),pos:=posinfo(),sc.2645(pos.start,pos.end-pos.start),sc.2003(sc.2008,"#Include " relative:=RelativePath(current(3).file,newsegment)),file:=FileOpen(newsegment,1,"UTF-8"),file.seek(0),file.write(text),file.length(file.position),update({file:newsegment,text:text}),node:=AddInclude(current(2).file,newsegment)
+		text:=sc.getseltext(),pos:=posinfo()
+		if(v.options.Includes_In_Place=1)
+			sc.2003(sc.2008,"#Include " relative:=RelativePath(current(3).file,newsegment))
+		else
+			Relative:=RegExReplace(RelativePath(current(2).file,newsegment),"i)^lib\\([^\\]+)\.ahk$","<$1>"),maintext:=Update({get:current(2).file}),update({file:current(2).file,text:maintext "`n#Include " Relative})
+		sc.2645(pos.start,pos.end-pos.start),file:=FileOpen(newsegment,1,"UTF-8"),file.seek(0),file.write(text),file.length(file.position),file.Close(),update({file:newsegment,text:text}),Refresh_Current_Project()
 		GuiControl,1:+Redraw,SysTreeView321
-		Code_Explorer.scan(node),Code_Explorer.scan(current())
-	}
-}
-AddInclude(main,new){
-	Relative:=RelativePath(main,new),path:=StrSplit(Relative,"\"),next:=current(1).firstchild
-	if(!v.options.Full_Tree)
-		for a,b in path
-			if(a!=path.MaxIndex())
-				slash:=v.options.Remove_Directory_Slash?"":"\",next:=files.under(next,"folder",{name:b,tv:FEAdd(slash b,ssn(next,"@tv").text,"Icon1 First Sort")})
-	filename:=path[path.MaxIndex()]
-	SplitPath,new,,dir
-	FileGetTime,time,%new%
-	node:=files.under(next,"file",{time:time,filename:filename,file:new,include:"#Include " Relative,tv:FEAdd(filename,ssn(next,"@tv").text,"Icon2 First Sort"),github:(folder!=rootfolder)?path[path.MaxIndex()-1] "\" filename:filename})
-	mainfile:=cexml.ssn("//main[@file='" main "']")
-	cexml.under(mainfile,"file",{type:"File",parent:ssn(mainfile,"@file").text,file:new,name:filename,folder:dir,order:"name,type,folder"})
-	return node
-}
+}}

@@ -1,5 +1,5 @@
 Hotkeys(win,item,track:=0){
-	static last:=[]
+	static last:=[],current
 	if(track)
 		while,off:=last.pop(){
 			Hotkey,IfWinActive,% hwnd([off.win])
@@ -36,10 +36,11 @@ Hotkeys(win,item,track:=0){
 		func:=RegExReplace(A_ThisHotkey,"\W"),%func%()
 	return
 	pluginlaunch:
-	func:=v.pluginobj[A_ThisHotkey]
+	current:=A_ThisHotkey
+	func:=v.pluginobj[current]
 	if(IsFunc(func))
 		return %func%()
-	ea:=menus.ea("//*[@hotkey='" A_ThisHotkey "']")
+	ea:=menus.ea("//*[@hotkey='" current "']")
 	if(ea.plugin){
 		if(!FileExist(ea.plugin))
 			MissingPlugin(ea.plugin,ea.clean)
