@@ -1,5 +1,5 @@
 AddBookmark(line,search){
-	sc:=csc(),end:=sc.2136(line),start:=sc.2128(line),name:=(settings.ssn("//bookmark").text),name?name:SubStr(StrSplit(current(2).file,"\").pop(),1,-4)
+	sc:=csc(),end:=sc.2136(line),start:=sc.2128(line),name:=(settings.ssn("//bookmark").text),name:=name?name:SubStr(StrSplit(current(2).file,"\").pop(),1,-4)
 	for a,b in {"$file":SubStr(StrSplit(current(3).file,"\").pop(),1,-4),"$project":SubStr(StrSplit(current(2).file,"\").pop(),1,-4)}
 		name:=RegExReplace(name,"i)\Q" a "\E",b)
 	if(RegExMatch(name,"UO)\[(.*)\]",time)){
