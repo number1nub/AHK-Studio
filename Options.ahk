@@ -92,7 +92,7 @@ Options(x:=0){
 	}
 	v.options[A_ThisLabel]:=onoff
 	if(A_ThisLabel="top_find")
-		Resize("Rebar")
+		Resize("Rebar"),RefreshThemes()
 	if(A_ThisLabel~="i)Disable_Folders_In_Project_Explorer|Full_Tree")
 		Refresh_Project_Explorer()
 	return

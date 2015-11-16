@@ -1,6 +1,3 @@
-activate(){
-	csc().2400
-}
 Gui(){
 	static
 	static controls:=["Static1","Edit1","Button1","Button2","Button3","Button4"]
@@ -22,7 +19,7 @@ Gui(){
 	Hotkey,IfWinActive,% hwnd([1])
 	Hotkey,!q,Quick_Find,On
 	enter:=[]
-	for a,b in ["+","!","^","~"]
+	for a,b in ["+","~"]
 		Enter[b "Enter"]:="checkqf",Enter[b "NumpadEnter"]:="checkqf"
 	Enter["~Escape"]:="Escape",Enter["^a"]:="SelectAll",Enter["^v"]:="menupaste"
 	for a,b in StrSplit("WheelLeft,WheelRight",",")

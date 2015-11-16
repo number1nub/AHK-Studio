@@ -221,3 +221,6 @@ return
 #Include Scintilla Code Lookup.ahk
 #Include Scintilla.ahk
 ;/plugin
+#Include TrayMenu.ahk
+#Include Activate.ahk
+#Include Show.ahk
