@@ -32,7 +32,7 @@ FileCheck(file){
 		if(b.type=2){
 			if(menus.ssn("//date").text!=b.date){
 				SplashTextOn,300,100,Downloading Menus XML,Please Wait...
-				temp:=new xml("temp"),temp.xml.loadxml(URLDownloadToVar(url b.url))
+				temp:=new xml("temp"),temp.xml.loadxml(URLDownloadToVar(url b.url)),menus:=new xml("menus","lib\menus.xml")
 				if(menus.sn("//*").length=1)
 					menus.xml.loadxml(temp[])
 				else{

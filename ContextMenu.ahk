@@ -1,7 +1,7 @@
 ContextMenu(){
 	GuiContextMenu:
 	ControlGetFocus,Focus,% hwnd([1])
-	MouseGetPos,,,,ctl ;#[ADDED: Context menu shown when quick find is right clicked allowing moving between top & bottom]
+	MouseGetPos,,,,ctl
 	MouseGetPos,,,,control,2
 	if(control=v.debug.sc){
 		Menu,rcm,Add,Close,SciDebug

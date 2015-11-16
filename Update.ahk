@@ -24,7 +24,7 @@ Update(info){
 			return
 		if(update[item]=sc.getuni())
 			return
-		if(updated[item]=""){	;#[FIXED: Maintain 'Hide File Extensions' option when updating project explorer]
+		if(updated[item]=""){
 			SplitPath,% ea.filename,,,,nne
 			TV_Modify(ea.tv,"","*" (v.options.Hide_File_Extensions?nne:ea.filename))
 		}
